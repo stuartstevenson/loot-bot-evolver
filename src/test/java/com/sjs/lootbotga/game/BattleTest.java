@@ -3,22 +3,22 @@ package com.sjs.lootbotga.game;
 import com.sjs.lootbotga.game.cards.*;
 import com.sjs.lootbotga.game.player.Player;
 import com.sjs.lootbotga.game.player.PlayerImpl;
-import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * User: StuartS
- * Date: 01/04/12
- * Time: 10:32
- */
-public class BattleTest extends TestCase{
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+public class BattleTest {
 	private Battle battle1;
 	private Battle battle2;
 
+    @Before
 	public void setUp() throws Exception {
 		battle1 = new Battle();
 		battle1.setAdmiral(new Card(CardType.ADMIRAL, null, null));
@@ -42,15 +42,18 @@ public class BattleTest extends TestCase{
 
 	}
 
+    @Test
 	public void testEquals() {
 		assertTrue(battle1.equals(battle2));
 	}
 
+    @Test
 	public void testMerchantNotEquals() {
 		battle2.setMerchant(new Card(CardType.MERCHANT, null, MerchantValue.EIGHT));
 		assertFalse(battle1.equals(battle2));
 	}
 
+    @Test
 	public void testFleetsNotEquals() {
 		Map<Player, List<Card>> fleets3 = new HashMap<Player, List<Card>>();
 		Player player2 = new PlayerImpl();

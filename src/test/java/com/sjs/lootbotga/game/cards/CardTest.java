@@ -1,14 +1,12 @@
 package com.sjs.lootbotga.game.cards;
 
-import com.sjs.lootbotga.game.cards.*;
-import junit.framework.TestCase;
+import org.junit.Test;
 
-/**
- * User: StuartS
- * Date: 01/04/12
- * Time: 10:19
- */
-public class CardTest extends TestCase {
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+public class CardTest  {
+    @Test
 	public void testEquals() {
 		Card card1 = new Card();
 		Card card2 = new Card();
@@ -21,6 +19,7 @@ public class CardTest extends TestCase {
 		assertTrue(card1.equals(card2));
 	}
 
+    @Test
 	public void testCardTypeNotEquals() {
 		Card card1 = new Card();
 		Card card2 = new Card();
@@ -31,6 +30,7 @@ public class CardTest extends TestCase {
 		assertFalse(card1.equals(card2));
 	}
 
+    @Test
 	public void testFleetTypeNotEquals() {
 		Card card1 = new Card();
 		Card card2 = new Card();
@@ -44,6 +44,7 @@ public class CardTest extends TestCase {
 		assertFalse(card1.equals(card2));
 	}
 
+    @Test
 	public void testCardValueEquals() {
 		Card card1 = new Card();
 		Card card2 = new Card();
@@ -60,6 +61,7 @@ public class CardTest extends TestCase {
 		assertTrue(card1.equals(card2));
 	}
 
+    @Test
 	public void testCardValueNotEquals() {
 		Card card1 = new Card();
 		Card card2 = new Card();

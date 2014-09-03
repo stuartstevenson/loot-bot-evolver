@@ -3,19 +3,19 @@ package com.sjs.lootbotga.evolver;
 import com.sjs.lootbotga.game.Battle;
 import com.sjs.lootbotga.game.cards.*;
 import com.sjs.lootbotga.game.player.*;
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * User: StuartS
- * Date: 01/04/12
- * Time: 12:24
- */
-public class PlayerCrossoverImplTest extends TestCase{
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+public class PlayerCrossoverImplTest {
+
+    @Test
 	public void testBreedPlayers() {
 		Player mother =new PlayerImpl();
 		Map<GameState, Move> motherStrategy = new HashMap<GameState, Move>();

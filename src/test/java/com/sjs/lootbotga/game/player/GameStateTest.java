@@ -2,22 +2,22 @@ package com.sjs.lootbotga.game.player;
 
 import com.sjs.lootbotga.game.Battle;
 import com.sjs.lootbotga.game.cards.*;
-import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * User: StuartS
- * Date: 01/04/12
- * Time: 10:33
- */
-public class GameStateTest extends TestCase{
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+public class GameStateTest {
 	private GameState gameState1;
 	private GameState gameState2;
 
+    @Before
 	public void setUp() throws Exception {
 		List<Card> hand1 = new ArrayList<Card>();
 		Card card1 = new Card();
@@ -56,15 +56,18 @@ public class GameStateTest extends TestCase{
 		gameState2 = new GameState(hand2, battleList2, false);
 	}
 
+    @Test
 	public void testEquals() {
 		assertTrue(gameState1.equals(gameState2));
 	}
 
+    @Test
 	public void testHandNotEquals() {
 		gameState2.getHand().add(new Card(CardType.PIRATE, FleetType.GREEN, PirateValue.ONE));
 		assertFalse(gameState1.equals(gameState2));
 	}
 
+    @Test
 	public void testBoardNotEquals() {
 		List<Battle> battleList3 = new ArrayList<Battle>();
 		Battle battle3 = new Battle();
