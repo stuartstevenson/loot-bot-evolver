@@ -14,7 +14,7 @@ import java.util.List;
  * Time: 20:46
  */
 @Component
-public class DealerImpl {
+public class DealerImpl implements Dealer {
 
     public static final int CARD_PER_HAND = 6;
 

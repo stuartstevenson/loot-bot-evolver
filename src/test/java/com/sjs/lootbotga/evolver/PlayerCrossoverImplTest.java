@@ -3,7 +3,12 @@ package com.sjs.lootbotga.evolver;
 import com.sjs.lootbotga.game.Battle;
 import com.sjs.lootbotga.game.cards.*;
 import com.sjs.lootbotga.game.player.*;
+import com.sjs.lootbotga.provider.RandomProvider;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,8 +16,16 @@ import java.util.List;
 import java.util.Map;
 
 import static org.fest.assertions.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class PlayerCrossoverImplTest {
+
+    @Mock
+    private RandomProvider randomProvider;
+
+    @InjectMocks
+    private PlayerCrossoverImpl playerCrossover;
 
     @Test
 	public void testBreedPlayers() {
@@ -80,9 +93,11 @@ public class PlayerCrossoverImplTest {
 		hand19.add(new Card(CardType.MERCHANT, null, MerchantValue.FOUR));
 		fatherStrategy.put(new GameState(hand19, new ArrayList<Battle>(), false), new Move(new Card(CardType.PIRATE, FleetType.YELLOW, PirateValue.THREE), MoveType.PLAY, null));
 		father.setStrategy(fatherStrategy);
+
+        when(randomProvider.random()).thenReturn(0.5);
 		
-		PlayerCrossover playerCrossover = new PlayerCrossoverImpl();
 		Player child = playerCrossover.breedPlayers(mother, father);
+
 		assertThat(child).isNotNull();
 		assertThat(child.getStrategy()).isNotNull();
         assertThat(mother.getStrategy()).isNotEqualTo(child.getStrategy());
