@@ -12,6 +12,7 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 /**
  * User: StuartS
@@ -81,11 +82,10 @@ public class LootBotEvolverImpl implements LootBotEvolver {
 	}
 
 	private List<Player> getOtherPlayers(final Player player) {
-		List<Player> otherPlayers = CollectionUtils.filter(generation, new CollectionFilter<Player>() {
-			public boolean filterOut(Player player1) {
-				return player1.equals(player);
-			}
-		});
+        List<Player> otherPlayers = generation
+                                        .stream()
+                                        .filter(p -> p.equals(player))
+                                        .collect(Collectors.toList());
 		Collections.shuffle(otherPlayers);
 		return otherPlayers.subList(0,3);
 	}

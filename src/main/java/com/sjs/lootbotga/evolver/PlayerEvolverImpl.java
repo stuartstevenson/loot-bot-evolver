@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * User: StuartS
@@ -61,18 +62,17 @@ public class PlayerEvolverImpl implements PlayerEvolver {
 	}
 
 	private Player getRandomFather(List<Player> selectedPlayers, final Player mother) {
-		List<Player> filteredPlayers = CollectionUtils.filter(selectedPlayers, new CollectionFilter<Player>() {
-			public boolean filterOut(Player player) {
-				return player.equals(mother);
-			}
-		});
+        List<Player> filteredPlayers = selectedPlayers
+                                            .parallelStream()
+                                            .filter(p -> p.equals(mother))
+                                            .collect(Collectors.toList());
 		Collections.shuffle(filteredPlayers);
-		return filteredPlayers.get(0);
+		return filteredPlayers.stream().findFirst().get();
 	}
 
 	private Player getRandonMother(List<Player> selectedPlayers) {
 		Collections.shuffle(selectedPlayers);
-		return selectedPlayers.get(0);
+		return selectedPlayers.stream().findFirst().get();
 	}
 	
 	
