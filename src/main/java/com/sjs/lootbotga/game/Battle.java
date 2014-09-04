@@ -5,6 +5,7 @@ import com.sjs.lootbotga.game.player.Player;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * User: StuartS
@@ -90,10 +91,9 @@ public class Battle {
 		for (List<Card> cards : battle.getFleets().values()) {
 			 thatCardSet.add(new HashSet<Card>(cards));
 		}
-		if (!thisCardSet.equals(thatCardSet)) return false;
 
-		return true;
-	}
+        return thisCardSet.equals(thatCardSet);
+    }
 
 	@Override
 	public int hashCode() {

@@ -45,11 +45,12 @@ public class LootBotEvolverImpl implements LootBotEvolver {
 	}
 
 	private Map<Player, Integer> playGames() {
-		List<Game> games = new ArrayList<Game>();
-		for (Player player : generation) {
-			games.add(playGame(player));
-		}
-		for (Game game : games) {
+		List<Game> games = generation
+                                .stream()
+                                .map(this::playGame)
+                                .collect(Collectors.toList());
+
+        for (Game game : games) {
 			game.run();
 		}
 

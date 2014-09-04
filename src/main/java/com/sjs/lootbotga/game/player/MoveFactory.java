@@ -9,6 +9,7 @@ import com.sjs.lootbotga.game.cards.FleetType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MoveFactory {
 	public static List<Move> findAllPossibleMoves(PlayerImpl player, Card card, Table table) {
@@ -17,19 +18,19 @@ public class MoveFactory {
 			allMoves.add(new Move(null,MoveType.PICKUP, null));
 		}
 		if (card.getCardType().equals(CardType.ADMIRAL)) {
-			for (Battle battle : table.getBattleList()){
-				if (battle.getPlayer().equals(player)) {
-					allMoves.add(new Move(card, MoveType.PLAY, battle));
-				}
-			}
+            allMoves.addAll(table.getBattleList()
+                    .stream()
+                    .filter(battle -> battle.getPlayer().equals(player))
+                    .map(battle -> new Move(card, MoveType.PLAY, battle))
+                    .collect(Collectors.toList()));
 		}
 		else if (card.getCardType().equals(CardType.CAPTAIN)) {
 			for (Battle battle : table.getBattleList()){
-				for (Map.Entry<Player, List<Card>> fleet: battle.getFleets().entrySet()) {
-					if (fleet.getKey().equals(player)) {
-						allMoves.add(new Move(card, MoveType.PLAY, battle));
-					}
-				}
+                allMoves.addAll(battle.getFleets().entrySet()
+                                                    .stream()
+                                                    .filter(fleet -> fleet.getKey().equals(player))
+                                                    .map(fleet -> new Move(card, MoveType.PLAY, battle))
+                                                    .collect(Collectors.toList()));
 			}
 		}
 		else if (card.getCardType().equals(CardType.MERCHANT)) {

@@ -46,12 +46,13 @@ public class GameEngineImpl implements GameEngine {
 
 	private void checkBattlesForWin(Player player) {
 		List<Battle> battlesWon = new ArrayList<Battle>();
-		for (Battle battle : table.getBattleList()) {
-			if (battle.getCurrentLeader().equals(player)) {
-				battlesWon.add(battle);
-				player.getBooty().add(battle.getMerchant());
-			}
-		}
+        table.getBattleList()
+                .stream()
+                .filter(battle -> battle.getCurrentLeader().equals(player))
+                .forEach(battle -> {
+                                    battlesWon.add(battle);
+                                    player.getBooty().add(battle.getMerchant());
+                        });
 		table.getBattleList().removeAll(battlesWon);
 	}
 

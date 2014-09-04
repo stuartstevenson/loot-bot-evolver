@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * User: StuartS
@@ -27,9 +28,10 @@ public class PlayerSelectorImpl implements PlayerSelector {
 		List<Player> survivingPlayers = new ArrayList<Player>();
 		for (int i = 0; i < Math.round(playerMap.size()*(1/percentageToKeep)); i++){
 			double value = randomProvider.random();
-			for (PlayerProbability playerProbability : playerProbabilities) {
-				if (playerProbability.isInRange(value)) survivingPlayers.add(playerProbability.player);
-			}
+            survivingPlayers.addAll(playerProbabilities.stream()
+                                                        .filter(playerProbability -> playerProbability.isInRange(value))
+                                                        .map(playerProbability -> playerProbability.player)
+                                                        .collect(Collectors.toList()));
 		}
 		return survivingPlayers;
 	}
