@@ -10,11 +10,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.setRemoveFestRelatedElementsFromStackTrace;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DealerTest {
