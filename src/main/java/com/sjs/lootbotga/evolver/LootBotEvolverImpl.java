@@ -77,8 +77,7 @@ public class LootBotEvolverImpl implements LootBotEvolver {
 		List<Player> players = new ArrayList<Player>();
 		players.add(player);
 		players.addAll(getOtherPlayers(player));
-		Game game = new Game(players);
-		return game;
+		return new Game(players);
 	}
 
 	private List<Player> getOtherPlayers(final Player player) {
