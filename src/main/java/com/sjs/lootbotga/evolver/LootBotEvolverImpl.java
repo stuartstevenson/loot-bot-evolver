@@ -84,7 +84,7 @@ public class LootBotEvolverImpl implements LootBotEvolver {
 	private List<Player> getOtherPlayers(final Player player) {
         List<Player> otherPlayers = generation
                                         .stream()
-                                        .filter(p -> p.equals(player))
+                                        .filter(p -> !p.equals(player))
                                         .collect(Collectors.toList());
 		Collections.shuffle(otherPlayers);
 		return otherPlayers.subList(0,3);
