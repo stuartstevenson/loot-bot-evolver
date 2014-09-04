@@ -1,6 +1,7 @@
 package com.sjs.lootbotga.evolver;
 
 import com.sjs.lootbotga.game.player.Player;
+import com.sjs.lootbotga.provider.RandomProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,11 +19,14 @@ public class PlayerSelectorImpl implements PlayerSelector {
 	@Autowired
 	private FitnessFunction fitnessFunction;
 
+    @Autowired
+    private RandomProvider randomProvider;
+
 	public List<Player> surviveFittest(Map<Player, Integer> playerMap, int percentageToKeep) {
 		List<PlayerProbability> playerProbabilities = fitnessFunction.evaluatePlayersChances(playerMap);
 		List<Player> survivingPlayers = new ArrayList<Player>();
 		for (int i = 0; i < Math.round(playerMap.size()*(1/percentageToKeep)); i++){
-			double value = Math.random();
+			double value = randomProvider.random();
 			for (PlayerProbability playerProbability : playerProbabilities) {
 				if (playerProbability.isInRange(value)) survivingPlayers.add(playerProbability.player);
 			}

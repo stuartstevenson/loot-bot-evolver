@@ -1,4 +1,4 @@
-package com.sjs.lootbotga.evolver;
+package com.sjs.lootbotga.evolver.mutation;
 
 import com.sjs.lootbotga.evolver.mutation.BattleMutator;
 import com.sjs.lootbotga.evolver.mutation.CardMutator;
