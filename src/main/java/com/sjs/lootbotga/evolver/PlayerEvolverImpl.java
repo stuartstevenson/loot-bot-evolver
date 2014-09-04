@@ -27,15 +27,6 @@ public class PlayerEvolverImpl implements PlayerEvolver {
 	@Autowired
 	private PlayerCrossover playerCrossover;
 
-	public PlayerEvolverImpl() {
-	}
-
-	public PlayerEvolverImpl(PlayerSelector playerSelector, PlayerMutator playerMutator, PlayerCrossover playerCrossover) {
-		this.playerSelector = playerSelector;
-		this.playerMutator = playerMutator;
-		this.playerCrossover = playerCrossover;
-	}
-
 	public List<Player> nextGeneration(List<Player> generation, Map<Player, Integer> playerMap, int generationCount) {
 		List<Player> selectedPlayers = playerSelector.surviveFittest(playerMap, PERCENTAGE_TO_KEEP);
 		return spawnNextGeneration(generation,selectedPlayers, generationCount);
