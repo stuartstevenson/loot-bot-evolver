@@ -26,6 +26,9 @@ public class MoveMutatorImplTest {
     @Mock
     private BattleMutator battleMutator;
 
+    @Mock
+    private MoveTypeMutator moveTypeMutator;
+
     @Test
     public void shouldMutateBattleThirdOfTheTime() {
 
@@ -38,5 +41,18 @@ public class MoveMutatorImplTest {
 
         verify(battleMutator).mutateBattle(battle);
 
+    }
+
+    @Test
+    public void shouldMutateMoveTypeThirdOfTheTime() {
+        Battle battle = new Battle();
+        MoveType moveType = MoveType.PLAY;
+
+        Move move = new Move(new Card(), moveType, battle);
+
+        when(randomProvider.random()).thenReturn(0.6);
+        moveMutator.mutateMove(move);
+
+        verify(moveTypeMutator).mutateMoveType(moveType);
     }
 }

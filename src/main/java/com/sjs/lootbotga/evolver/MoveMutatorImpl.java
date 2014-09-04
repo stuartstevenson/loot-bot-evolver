@@ -17,6 +17,9 @@ public class MoveMutatorImpl implements MoveMutator {
     @Autowired
     private BattleMutator battleMutator;
 
+    @Autowired
+    private MoveTypeMutator moveTypeMutator;
+
     @Override
     public void mutateMove(Move move) {
         double random = randomProvider.random();
@@ -24,7 +27,7 @@ public class MoveMutatorImpl implements MoveMutator {
             mutateCard(move.getCard());
         }
         else if (random < 2f/3f) {
-            mutateMoveType(move.getMoveType());
+            moveTypeMutator.mutateMoveType(move.getMoveType());
         }
         else {
             battleMutator.mutateBattle(move.getBattle());
