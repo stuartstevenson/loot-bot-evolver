@@ -31,19 +31,9 @@ public class PlayerSelectorImpl implements PlayerSelector {
 			double value = randomProvider.random();
             survivingPlayers.addAll(playerProbabilities.stream()
                                                         .filter(playerProbability -> playerProbability.isInRange(value))
-                                                        .map(playerProbability -> playerProbability.player)
+                                                        .map(PlayerProbability::getPlayer)
                                                         .collect(Collectors.toList()));
 		}
 		return survivingPlayers;
-	}
-
-	class PlayerProbability {
-		Player player;
-		double lowerRange;
-		double upperRange;
-
-		boolean isInRange(double randomValue) {
-            return randomValue > lowerRange && randomValue <= upperRange;
-        }
 	}
 }

@@ -14,5 +14,5 @@ import java.util.Map;
  */
 @Component
 public interface FitnessFunction {
-	List<PlayerSelectorImpl.PlayerProbability> evaluatePlayersChances(List<PlayerResult> playerResults);
+	List<PlayerProbability> evaluatePlayersChances(List<PlayerResult> playerResults);
 }
