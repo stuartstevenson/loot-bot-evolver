@@ -1,9 +1,5 @@
 package com.sjs.lootbotga.evolver.mutation;
 
-import com.sjs.lootbotga.evolver.mutation.BattleMutator;
-import com.sjs.lootbotga.evolver.mutation.CardMutator;
-import com.sjs.lootbotga.evolver.mutation.MoveMutatorImpl;
-import com.sjs.lootbotga.evolver.mutation.MoveTypeMutator;
 import com.sjs.lootbotga.game.Battle;
 import com.sjs.lootbotga.game.cards.Card;
 import com.sjs.lootbotga.game.player.Move;
@@ -15,9 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MoveMutatorImplTest {
