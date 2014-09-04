@@ -1,17 +1,15 @@
 package com.sjs.lootbotga.evolver.mutation;
 
-import com.sjs.lootbotga.game.cards.*;
-import com.sjs.lootbotga.provider.RandomProvider;
+import com.sjs.lootbotga.game.cards.Card;
+import com.sjs.lootbotga.game.cards.CardType;
+import com.sjs.lootbotga.game.cards.FleetType;
+import com.sjs.lootbotga.game.cards.PirateValue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CardMutatorImplTest {
@@ -19,20 +17,12 @@ public class CardMutatorImplTest {
     @InjectMocks
     private CardMutatorImpl cardMutator;
 
-    @Mock
-    private RandomProvider randomProvider;
-
-    @Mock
-    private CardTypeMutator cardTypeMutator;
-
     @Test
-    public void shouldChangeCardTypeThirdOfTheTime() {
+    public void shouldNotBeTheSameCard() {
         Card card = new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.ONE);
 
-        when(randomProvider.random()).thenReturn(0.3);
+        Card newCard = cardMutator.mutateCard(card);
 
-        cardMutator.mutateCard(card);
-
-        verify(cardTypeMutator, atLeastOnce()).mutateCardType(any(CardType.class));
+        assertThat(card).isNotEqualTo(newCard);
     }
 }
