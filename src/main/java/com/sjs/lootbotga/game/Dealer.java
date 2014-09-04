@@ -15,8 +15,10 @@ import java.util.List;
  */
 @Component
 public class Dealer {
-	
-	public static List<Card> getNewDeck() {
+
+    public static final int CARD_PER_HAND = 6;
+
+    public static List<Card> getNewDeck() {
 		List<Card> cards = new ArrayList<Card>();
 		//admiral
 		cards.add(new Card(CardType.ADMIRAL, null, null));
@@ -40,11 +42,11 @@ public class Dealer {
 	}
 
 	public static void deal(Table table, List<Player> players) {
-		List<Card> hands = table.getDeck().subList(0, players.size()*6);
+		List<Card> hands = table.getDeck().subList(0, players.size()* CARD_PER_HAND);
 		for (int i = 0; i < hands.size(); i++) {
 			players.get(i % players.size()).getHand().add(hands.get(i));
 		}
-		table.setDeck(table.getDeck().subList((players.size()*6), table.getDeck().size()));
+		table.setDeck(table.getDeck().subList((players.size()*CARD_PER_HAND), table.getDeck().size()));
 	}
 
 //	public static void main(String[] args) {
