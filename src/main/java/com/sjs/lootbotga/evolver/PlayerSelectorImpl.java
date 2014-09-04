@@ -43,8 +43,7 @@ public class PlayerSelectorImpl implements PlayerSelector {
 		double upperRange;
 
 		boolean isInRange(double randomValue) {
-			if (randomValue > lowerRange && randomValue <= upperRange ) return true;
-			return false;
-		}
+            return randomValue > lowerRange && randomValue <= upperRange;
+        }
 	}
 }
