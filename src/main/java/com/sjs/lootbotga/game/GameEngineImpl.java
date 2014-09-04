@@ -5,7 +5,7 @@ import com.sjs.lootbotga.game.cards.CardType;
 import com.sjs.lootbotga.game.player.Move;
 import com.sjs.lootbotga.game.player.MoveType;
 import com.sjs.lootbotga.game.player.Player;
-import com.sjs.lootbotga.game.player.PlayerFactoryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -20,11 +20,15 @@ import java.util.Map;
  */
 @Component
 public class GameEngineImpl implements GameEngine {
+
+    @Autowired
+    private DealerImpl dealer;
+
 	private Table table = new Table();
 	private List<Player> players;
 
 	public void playGame() {
-		Dealer.deal(table, players);
+		dealer.deal(table, players);
 		boolean endgame = false;
 		do {
 			for (Player player : players) {
@@ -127,7 +131,7 @@ public class GameEngineImpl implements GameEngine {
 	}
 
 	public void setup(List<Player> playerList) {
-		table.setDeck(Dealer.getNewDeck());
+		table.setDeck(dealer.getNewDeck());
 		players = playerList;
 		table.setDiscards(new ArrayList<Card>());
 		table.setBattleList(new ArrayList<Battle>());

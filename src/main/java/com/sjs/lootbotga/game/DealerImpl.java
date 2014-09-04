@@ -14,11 +14,11 @@ import java.util.List;
  * Time: 20:46
  */
 @Component
-public class Dealer {
+public class DealerImpl {
 
     public static final int CARD_PER_HAND = 6;
 
-    public static List<Card> getNewDeck() {
+    public List<Card> getNewDeck() {
 		List<Card> cards = new ArrayList<Card>();
 		//admiral
 		cards.add(new Card(CardType.ADMIRAL, null, null));
@@ -41,7 +41,7 @@ public class Dealer {
 		return cards;
 	}
 
-	public static void deal(Table table, List<Player> players) {
+	public void deal(Table table, List<Player> players) {
 		List<Card> hands = table.getDeck().subList(0, players.size()* CARD_PER_HAND);
 		for (int i = 0; i < hands.size(); i++) {
 			players.get(i % players.size()).getHand().add(hands.get(i));
