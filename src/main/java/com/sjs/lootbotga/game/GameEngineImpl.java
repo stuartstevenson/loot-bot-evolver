@@ -21,8 +21,7 @@ import java.util.Map;
 @Component
 public class GameEngineImpl implements GameEngine {
 
-    @Autowired
-    private DealerImpl dealer;
+    private Dealer dealer = new DealerImpl();
 
 	private Table table = new Table();
 	private List<Player> players;
@@ -50,9 +49,9 @@ public class GameEngineImpl implements GameEngine {
                 .stream()
                 .filter(battle -> battle.getCurrentLeader().equals(player))
                 .forEach(battle -> {
-                                    battlesWon.add(battle);
-                                    player.getBooty().add(battle.getMerchant());
-                        });
+                    battlesWon.add(battle);
+                    player.getBooty().add(battle.getMerchant());
+                });
 		table.getBattleList().removeAll(battlesWon);
 	}
 
