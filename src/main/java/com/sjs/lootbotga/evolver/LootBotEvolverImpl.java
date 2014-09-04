@@ -21,7 +21,9 @@ import java.util.stream.Collectors;
  */
 @Component
 public class LootBotEvolverImpl implements LootBotEvolver {
-	@Autowired
+    public static final int NUM_PLAYER = 4;
+    public static final int START_WINS_VALUE = 0;
+    @Autowired
 	private PlayerFactory playerFactory;
 	@Autowired
 	private List<Player> generation;
@@ -39,7 +41,7 @@ public class LootBotEvolverImpl implements LootBotEvolver {
 	}
 
 	public void run() {
-		generation = playerFactory.generatePlayers(4, generationCount);
+		generation = playerFactory.generatePlayers(NUM_PLAYER, generationCount);
 		int i = 0;
 		while (i < generationCount) {
 			Map<Player, Integer> playerMap = playGames();
@@ -62,7 +64,7 @@ public class LootBotEvolverImpl implements LootBotEvolver {
 	private Map<Player, Integer> extractPlayerTotals(List<Game> games) {
 		Map<Player, Integer> playerWins = new HashMap<Player, Integer>();
 		for (Player player : generation) {
-			playerWins.put(player, 0);
+			playerWins.put(player, START_WINS_VALUE);
 		}
 		for (Game game : games) {
 			if (playerWins.containsKey(game.winner())){
