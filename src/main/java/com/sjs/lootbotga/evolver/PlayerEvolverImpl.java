@@ -5,12 +5,12 @@ import com.sjs.lootbotga.game.player.Player;
 import com.sjs.lootbotga.game.player.PlayerFactoryImpl;
 import com.sjs.lootbotga.game.player.PlayerResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -20,7 +20,10 @@ import java.util.stream.Collectors;
  */
 @Component
 public class PlayerEvolverImpl implements PlayerEvolver {
-    public static final int PERCENTAGE_TO_KEEP = 20;
+
+    @Value("${loot.fraction.to.keep}")
+    private int fractionToKeep;
+
     @Autowired
 	private PlayerSelector playerSelector;
 	@Autowired
@@ -29,7 +32,7 @@ public class PlayerEvolverImpl implements PlayerEvolver {
 	private PlayerCrossover playerCrossover;
 
 	public List<Player> nextGeneration(List<Player> generation, List<PlayerResult> playerResults, int generationCount) {
-		List<Player> selectedPlayers = playerSelector.surviveFittest(playerResults, PERCENTAGE_TO_KEEP);
+		List<Player> selectedPlayers = playerSelector.surviveFittest(playerResults, fractionToKeep);
 		return spawnNextGeneration(generation,selectedPlayers, generationCount);
 	}
 
