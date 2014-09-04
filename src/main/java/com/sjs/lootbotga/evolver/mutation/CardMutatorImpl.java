@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 public class CardMutatorImpl implements CardMutator {
     @Override
     public void mutateCard(Card card) {
-
+        //todo mutate card
     }
 }

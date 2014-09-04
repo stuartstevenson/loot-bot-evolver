@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 public class BattleMutatorImpl implements BattleMutator {
     @Override
     public void mutateBattle(Battle battle) {
-
+        //todo mutate battle
     }
 }

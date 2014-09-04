@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 public class MoveTypeMutatorImpl implements MoveTypeMutator {
     @Override
     public void mutateMoveType(MoveType moveType) {
-
+        //todo movetype mutator
     }
 }
