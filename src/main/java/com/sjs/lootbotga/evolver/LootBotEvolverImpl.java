@@ -1,17 +1,12 @@
 package com.sjs.lootbotga.evolver;
 
+import com.sjs.lootbotga.game.Game;
 import com.sjs.lootbotga.game.player.Player;
 import com.sjs.lootbotga.game.player.PlayerFactory;
-import com.sjs.lootbotga.game.Game;
-import com.sjs.lootbotga.utils.CollectionFilter;
-import com.sjs.lootbotga.utils.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 /**
