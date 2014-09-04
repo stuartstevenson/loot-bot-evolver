@@ -2,8 +2,7 @@ package com.sjs.lootbotga.game.player;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 public class PlayerTest {
 
@@ -15,7 +14,7 @@ public class PlayerTest {
 		player1.setId(101);
 		player2.setId(101);
 
-		assertTrue(player1.equals(player2));
+		assertThat(player1).isEqualTo(player2);
 	}
 
     @Test
@@ -27,6 +26,6 @@ public class PlayerTest {
 		player1.setId(101);
 		player2.setId(102);
 
-		assertFalse(player1.equals(player2));
+		assertThat(player1).isNotEqualTo(player2);
 	}
 }

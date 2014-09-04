@@ -10,8 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 public class PlayerCrossoverImplTest {
 
@@ -84,9 +83,9 @@ public class PlayerCrossoverImplTest {
 		
 		PlayerCrossover playerCrossover = new PlayerCrossoverImpl();
 		Player child = playerCrossover.breedPlayers(mother, father);
-		assertNotNull(child);
-		assertNotNull(child.getStrategy());
-		assertTrue(!mother.getStrategy().equals(child.getStrategy()));
-		assertTrue(!father.getStrategy().equals(child.getStrategy()));
+		assertThat(child).isNotNull();
+		assertThat(child.getStrategy()).isNotNull();
+        assertThat(mother.getStrategy()).isNotEqualTo(child.getStrategy());
+        assertThat(father.getStrategy()).isNotEqualTo(child.getStrategy());
 	}
 }

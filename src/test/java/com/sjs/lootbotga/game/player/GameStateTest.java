@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.fest.assertions.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -58,13 +59,13 @@ public class GameStateTest {
 
     @Test
 	public void testEquals() {
-		assertTrue(gameState1.equals(gameState2));
+		assertThat(gameState1).isEqualTo(gameState2);
 	}
 
     @Test
 	public void testHandNotEquals() {
 		gameState2.getHand().add(new Card(CardType.PIRATE, FleetType.GREEN, PirateValue.ONE));
-		assertFalse(gameState1.equals(gameState2));
+		assertThat(gameState1).isNotEqualTo(gameState2);
 	}
 
     @Test
@@ -80,6 +81,6 @@ public class GameStateTest {
 		battle3.setFleets(fleets3);
 		battleList3.add(battle3);
 		gameState2.setBoard(battleList3);
-		assertFalse(gameState1.equals(gameState2));
+		assertThat(gameState1).isNotEqualTo(gameState2);
 	}
 }

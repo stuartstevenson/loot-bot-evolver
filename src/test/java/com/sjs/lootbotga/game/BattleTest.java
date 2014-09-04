@@ -11,8 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 public class BattleTest {
 	private Battle battle1;
@@ -23,9 +22,9 @@ public class BattleTest {
 		battle1 = new Battle();
 		battle1.setAdmiral(new Card(CardType.ADMIRAL, null, null));
 		battle1.setMerchant(new Card(CardType.MERCHANT, null, MerchantValue.TWO));
-		Map<Player, List<Card>> fleets1 = new HashMap<Player, List<Card>>();
+		Map<Player, List<Card>> fleets1 = new HashMap<>();
 		Player player1 = new PlayerImpl();
-		List<Card> hand1 = new ArrayList<Card>();
+		List<Card> hand1 = new ArrayList<>();
 		hand1.add(new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.ONE));
 		fleets1.put(player1, hand1);
 		battle1.setFleets(fleets1);
@@ -33,9 +32,9 @@ public class BattleTest {
 		battle2 = new Battle();
 		battle2.setAdmiral(new Card(CardType.ADMIRAL, null, null));
 		battle2.setMerchant(new Card(CardType.MERCHANT, null, MerchantValue.TWO));
-		Map<Player, List<Card>> fleets2 = new HashMap<Player, List<Card>>();
+		Map<Player, List<Card>> fleets2 = new HashMap<>();
 		Player player2 = new PlayerImpl();
-		List<Card> hand2 = new ArrayList<Card>();
+		List<Card> hand2 = new ArrayList<>();
 		hand2.add(new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.ONE));
 		fleets2.put(player2, hand2);
 		battle2.setFleets(fleets2);
@@ -44,23 +43,23 @@ public class BattleTest {
 
     @Test
 	public void testEquals() {
-		assertTrue(battle1.equals(battle2));
+		assertThat(battle1).isEqualTo(battle2);
 	}
 
     @Test
 	public void testMerchantNotEquals() {
 		battle2.setMerchant(new Card(CardType.MERCHANT, null, MerchantValue.EIGHT));
-		assertFalse(battle1.equals(battle2));
+		assertThat(battle1).isNotEqualTo(battle2);
 	}
 
     @Test
 	public void testFleetsNotEquals() {
-		Map<Player, List<Card>> fleets3 = new HashMap<Player, List<Card>>();
+		Map<Player, List<Card>> fleets3 = new HashMap<>();
 		Player player2 = new PlayerImpl();
-		List<Card> hand2 = new ArrayList<Card>();
+		List<Card> hand2 = new ArrayList<>();
 		hand2.add(new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.TWO));
 		fleets3.put(player2, hand2);
 		battle2.setFleets(fleets3);
-		assertFalse(battle1.equals(battle2));
+		assertThat(battle1).isNotEqualTo(battle2);
 	}
 }

@@ -2,8 +2,7 @@ package com.sjs.lootbotga.game.cards;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 public class CardTest  {
     @Test
@@ -16,7 +15,7 @@ public class CardTest  {
 		card2.setFleetType(null);
 		card1.setValue(null);
 		card2.setValue(null);
-		assertTrue(card1.equals(card2));
+		assertThat(card1).isEqualTo(card2);
 	}
 
     @Test
@@ -27,7 +26,7 @@ public class CardTest  {
 		card1.setCardType(CardType.PIRATE);
 		card2.setCardType(CardType.CAPTAIN);
 
-		assertFalse(card1.equals(card2));
+		assertThat(card1).isNotEqualTo(card2);
 	}
 
     @Test
@@ -41,7 +40,7 @@ public class CardTest  {
 		card1.setFleetType(FleetType.BLUE);
 		card2.setFleetType(FleetType.GREEN);
 
-		assertFalse(card1.equals(card2));
+		assertThat(card1).isNotEqualTo(card2);
 	}
 
     @Test
@@ -58,7 +57,7 @@ public class CardTest  {
 		card1.setValue(PirateValue.ONE);
 		card2.setValue(PirateValue.ONE);
 
-		assertTrue(card1.equals(card2));
+		assertThat(card1).isEqualTo(card2);
 	}
 
     @Test
@@ -75,6 +74,6 @@ public class CardTest  {
 		card1.setValue(PirateValue.ONE);
 		card2.setValue(PirateValue.TWO);
 
-		assertFalse(card1.equals(card2));
+		assertThat(card1).isNotEqualTo(card2);
 	}
 }

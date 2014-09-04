@@ -9,12 +9,12 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertFalse;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 public class PlayerMutatorImplTest {
 
     @Test
-	public void testMutatePlayer() {
+	public void shouldNotMutatePlayerWithNoStrategies() {
 		Player player = new PlayerImpl();
 		Map<GameState, Move> playerStrategy = new HashMap<GameState, Move>();
 		player.setStrategy(playerStrategy);
@@ -22,6 +22,6 @@ public class PlayerMutatorImplTest {
 		PlayerMutator playerMutator = new PlayerMutatorImpl();
 		playerMutator.mutatePlayer(player);
 
-		assertFalse(playerStrategy.equals(player.getStrategy()));
+		assertThat(playerStrategy).isEqualTo(player.getStrategy());
 	}
 }

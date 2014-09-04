@@ -22,14 +22,15 @@ public class PlayerMutatorImpl implements PlayerMutator {
 	public void mutatePlayer(Player player) {
 		//todo apply mutation to a player entity
 		int numStrategies = player.getStrategy().size();
-		int strategyToMutate = new Long(Math.round(Math.random()*numStrategies)).intValue();
-		Map.Entry<GameState, Move> strategy = new ArrayList<Map.Entry<GameState, Move>>(player.getStrategy().entrySet()).get((strategyToMutate > 0 ? strategyToMutate-1 : 0));
-		if (Math.random() > 0.5) {
-			mutateGameState(strategy.getKey());
-		} 
-		else {
-			mutateMove(strategy.getValue());	
-		}
+        if (numStrategies > 0) {
+            int strategyToMutate = new Long(Math.round(Math.random() * numStrategies)).intValue();
+            Map.Entry<GameState, Move> strategy = new ArrayList<>(player.getStrategy().entrySet()).get((strategyToMutate > 0 ? strategyToMutate - 1 : 0));
+            if (Math.random() > 0.5) {
+                mutateGameState(strategy.getKey());
+            } else {
+                mutateMove(strategy.getValue());
+            }
+        }
 	}
 
 	private void mutateMove(Move move) {
