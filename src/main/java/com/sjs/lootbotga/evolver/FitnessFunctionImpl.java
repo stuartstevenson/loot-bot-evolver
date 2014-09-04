@@ -1,6 +1,7 @@
 package com.sjs.lootbotga.evolver;
 
 import com.sjs.lootbotga.game.player.Player;
+import com.sjs.lootbotga.game.player.PlayerResult;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Map;
  */
 @Component
 public class FitnessFunctionImpl implements FitnessFunction {
-	public List<PlayerSelectorImpl.PlayerProbability> evaluatePlayersChances(Map<Player, Integer> playerMap) {
+	public List<PlayerSelectorImpl.PlayerProbability> evaluatePlayersChances(List<PlayerResult> playerResults) {
 		//todo fitness function
 		return null;  //To change body of implemented methods use File | Settings | File Templates.
 	}

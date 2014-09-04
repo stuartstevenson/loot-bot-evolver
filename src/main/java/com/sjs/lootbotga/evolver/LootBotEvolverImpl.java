@@ -3,6 +3,7 @@ package com.sjs.lootbotga.evolver;
 import com.sjs.lootbotga.game.Game;
 import com.sjs.lootbotga.game.player.Player;
 import com.sjs.lootbotga.game.player.PlayerFactory;
+import com.sjs.lootbotga.game.player.PlayerResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,12 +40,12 @@ public class LootBotEvolverImpl implements LootBotEvolver {
 		generation = playerFactory.generatePlayers(NUM_PLAYER, generationCount);
 		int i = 0;
 		while (i < generationCount) {
-			Map<Player, Integer> playerMap = playGames();
-			generation = playerEvolver.nextGeneration(generation, playerMap, i++);
+            List<PlayerResult> playerResults = playGames();
+			generation = playerEvolver.nextGeneration(generation, playerResults, i++);
 		}
 	}
 
-	private Map<Player, Integer> playGames() {
+	private List<PlayerResult> playGames() {
 		List<Game> games = generation
                                 .stream()
                                 .map(this::playGame)
@@ -57,21 +58,28 @@ public class LootBotEvolverImpl implements LootBotEvolver {
 		return extractPlayerTotals(games);
 	}
 
-	private Map<Player, Integer> extractPlayerTotals(List<Game> games) {
-		Map<Player, Integer> playerWins = new HashMap<Player, Integer>();
-		for (Player player : generation) {
-			playerWins.put(player, START_WINS_VALUE);
+	private List<PlayerResult>  extractPlayerTotals(List<Game> games) {
+        List<PlayerResult> playerResults = generation
+                                                    .stream()
+                                                    .map(player -> new PlayerResult(player, START_WINS_VALUE))
+                                                    .collect(Collectors.toList());
+
+        for (Game game : games) {
+            findPlayerIn(playerResults, game.winner()).incrementWin();
 		}
-		for (Game game : games) {
-			if (playerWins.containsKey(game.winner())){
-				Integer wins = playerWins.get(game.winner());
-				playerWins.put(game.winner(), wins++);
-			}
-		}
-		return playerWins;
+
+		return playerResults;
 	}
 
-	private Game playGame(Player player) {
+    private PlayerResult findPlayerIn(List<PlayerResult> playerResults, Player winner) {
+        return playerResults
+                .stream()
+                .filter(p -> p.getPlayer().equals(winner))
+                .findFirst()
+                .get();
+    }
+
+    private Game playGame(Player player) {
 		List<Player> players = new ArrayList<Player>();
 		players.add(player);
 		players.addAll(getOtherPlayers(player));

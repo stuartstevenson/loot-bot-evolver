@@ -3,6 +3,7 @@ package com.sjs.lootbotga.evolver;
 import com.sjs.lootbotga.evolver.mutation.PlayerMutator;
 import com.sjs.lootbotga.game.player.Player;
 import com.sjs.lootbotga.game.player.PlayerFactoryImpl;
+import com.sjs.lootbotga.game.player.PlayerResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,8 +28,8 @@ public class PlayerEvolverImpl implements PlayerEvolver {
 	@Autowired
 	private PlayerCrossover playerCrossover;
 
-	public List<Player> nextGeneration(List<Player> generation, Map<Player, Integer> playerMap, int generationCount) {
-		List<Player> selectedPlayers = playerSelector.surviveFittest(playerMap, PERCENTAGE_TO_KEEP);
+	public List<Player> nextGeneration(List<Player> generation, List<PlayerResult> playerResults, int generationCount) {
+		List<Player> selectedPlayers = playerSelector.surviveFittest(playerResults, PERCENTAGE_TO_KEEP);
 		return spawnNextGeneration(generation,selectedPlayers, generationCount);
 	}
 
