@@ -31,7 +31,7 @@ public class PlayerSelectorImpl implements PlayerSelector {
 				if (playerProbability.isInRange(value)) survivingPlayers.add(playerProbability.player);
 			}
 		}
-		return null;
+		return survivingPlayers;
 	}
 
 	class PlayerProbability {

@@ -19,7 +19,8 @@ import java.util.stream.Collectors;
  */
 @Component
 public class PlayerEvolverImpl implements PlayerEvolver {
-	@Autowired
+    public static final int PERCENTAGE_TO_KEEP = 20;
+    @Autowired
 	private PlayerSelector playerSelector;
 	@Autowired
 	private PlayerMutator playerMutator;
@@ -36,7 +37,7 @@ public class PlayerEvolverImpl implements PlayerEvolver {
 	}
 
 	public List<Player> nextGeneration(List<Player> generation, Map<Player, Integer> playerMap, int generationCount) {
-		List<Player> selectedPlayers = playerSelector.surviveFittest(playerMap, 20);
+		List<Player> selectedPlayers = playerSelector.surviveFittest(playerMap, PERCENTAGE_TO_KEEP);
 		return spawnNextGeneration(generation,selectedPlayers, generationCount);
 	}
 
