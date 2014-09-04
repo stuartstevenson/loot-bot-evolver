@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -29,6 +30,9 @@ public class MoveMutatorImplTest {
     @Mock
     private MoveTypeMutator moveTypeMutator;
 
+    @Mock
+    private CardMutator cardMutator;
+
     @Test
     public void shouldMutateBattleThirdOfTheTime() {
 
@@ -39,7 +43,7 @@ public class MoveMutatorImplTest {
         when(randomProvider.random()).thenReturn(0.8);
         moveMutator.mutateMove(move);
 
-        verify(battleMutator).mutateBattle(battle);
+        verify(battleMutator, atLeastOnce()).mutateBattle(battle);
 
     }
 
@@ -53,6 +57,20 @@ public class MoveMutatorImplTest {
         when(randomProvider.random()).thenReturn(0.6);
         moveMutator.mutateMove(move);
 
-        verify(moveTypeMutator).mutateMoveType(moveType);
+        verify(moveTypeMutator, atLeastOnce()).mutateMoveType(moveType);
+    }
+
+    @Test
+    public void shouldMutateCardThirdOfTheTime() {
+        Battle battle = new Battle();
+        MoveType moveType = MoveType.PLAY;
+        Card card = new Card();
+
+        Move move = new Move(card, moveType, battle);
+
+        when(randomProvider.random()).thenReturn(0.3);
+        moveMutator.mutateMove(move);
+
+        verify(cardMutator, atLeastOnce()).mutateCard(card);
     }
 }
