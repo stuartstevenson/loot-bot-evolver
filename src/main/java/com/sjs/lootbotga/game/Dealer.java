@@ -47,11 +47,11 @@ public class Dealer {
 		table.setDeck(table.getDeck().subList((players.size()*6), table.getDeck().size()));
 	}
 
-	public static void main(String[] args) {
-		List<Card> deck = Dealer.getNewDeck();
-		for (Card card : deck) {
-			System.out.println(card.toString());
-		}
-		System.out.println(deck.size());
-	}
+//	public static void main(String[] args) {
+//		List<Card> deck = Dealer.getNewDeck();
+//		for (Card card : deck) {
+//			System.out.println(card.toString());
+//		}
+//		System.out.println(deck.size());
+//	}
 }

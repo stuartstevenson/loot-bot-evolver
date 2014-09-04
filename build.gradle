@@ -1,4 +1,14 @@
 apply plugin: 'java'
+apply plugin: 'spring-boot'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.5.RELEASE")
+    }
+}
 
 repositories {
     mavenLocal()
@@ -6,6 +16,6 @@ repositories {
 }
 
 dependencies {
-    compile "org.springframework:spring-context:3.1.4.RELEASE"
+    compile "org.springframework.boot:spring-boot-starter"
     testCompile "junit:junit:4.11"
 }

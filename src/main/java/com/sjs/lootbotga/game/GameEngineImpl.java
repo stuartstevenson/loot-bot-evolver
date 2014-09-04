@@ -133,13 +133,13 @@ public class GameEngineImpl implements GameEngine {
 		table.setBattleList(new ArrayList<Battle>());
 	}
 
-	public static void main(String[] args) {
-		List<Player> players = new PlayerFactoryImpl().generatePlayers(4, 1);
-		GameEngine gameEngine = new GameEngineImpl();
-		gameEngine.setup(players);
-		gameEngine.playGame();
-		for (Player player : players) {
-			System.out.println(player.getId());
-		}
-	}
+//	public static void main(String[] args) {
+//		List<Player> players = new PlayerFactoryImpl().generatePlayers(4, 1);
+//		GameEngine gameEngine = new GameEngineImpl();
+//		gameEngine.setup(players);
+//		gameEngine.playGame();
+//		for (Player player : players) {
+//			System.out.println(player.getId());
+//		}
+//	}
 }
