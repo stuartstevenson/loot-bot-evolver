@@ -14,6 +14,9 @@ public class MoveMutatorImpl implements MoveMutator {
     @Autowired
     private RandomProvider randomProvider;
 
+    @Autowired
+    private BattleMutator battleMutator;
+
     @Override
     public void mutateMove(Move move) {
         double random = randomProvider.random();
@@ -24,11 +27,8 @@ public class MoveMutatorImpl implements MoveMutator {
             mutateMoveType(move.getMoveType());
         }
         else {
-            mutateBattle(move.getBattle());
+            battleMutator.mutateBattle(move.getBattle());
         }
-    }
-
-    private void mutateBattle(Battle battle) {
     }
 
     private void mutateMoveType(MoveType moveType) {
