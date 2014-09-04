@@ -27,7 +27,7 @@ public class MoveMutatorImpl implements MoveMutator {
             cardMutator.mutateCard(move.getCard());
         }
         else if (random < 2f/3f) {
-            moveTypeMutator.mutateMoveType(move.getMoveType());
+            move.setMoveType(moveTypeMutator.mutateMoveType(move.getMoveType()));
         }
         else {
             battleMutator.mutateBattle(move.getBattle());
