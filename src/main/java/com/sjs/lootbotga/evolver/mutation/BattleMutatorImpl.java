@@ -1,4 +1,4 @@
-package com.sjs.lootbotga.evolver;
+package com.sjs.lootbotga.evolver.mutation;
 
 import com.sjs.lootbotga.game.Battle;
 import org.springframework.stereotype.Component;

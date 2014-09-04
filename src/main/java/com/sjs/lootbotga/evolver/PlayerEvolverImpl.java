@@ -1,11 +1,8 @@
 package com.sjs.lootbotga.evolver;
 
+import com.sjs.lootbotga.evolver.mutation.PlayerMutator;
 import com.sjs.lootbotga.game.player.Player;
-import com.sjs.lootbotga.game.player.PlayerFactory;
 import com.sjs.lootbotga.game.player.PlayerFactoryImpl;
-import com.sjs.lootbotga.game.player.PlayerImpl;
-import com.sjs.lootbotga.utils.CollectionFilter;
-import com.sjs.lootbotga.utils.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

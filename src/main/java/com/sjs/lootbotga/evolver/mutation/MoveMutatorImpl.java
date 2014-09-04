@@ -1,9 +1,6 @@
-package com.sjs.lootbotga.evolver;
+package com.sjs.lootbotga.evolver.mutation;
 
-import com.sjs.lootbotga.game.Battle;
-import com.sjs.lootbotga.game.cards.Card;
 import com.sjs.lootbotga.game.player.Move;
-import com.sjs.lootbotga.game.player.MoveType;
 import com.sjs.lootbotga.provider.RandomProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

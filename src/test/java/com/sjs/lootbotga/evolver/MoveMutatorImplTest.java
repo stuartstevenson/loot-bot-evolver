@@ -1,5 +1,9 @@
 package com.sjs.lootbotga.evolver;
 
+import com.sjs.lootbotga.evolver.mutation.BattleMutator;
+import com.sjs.lootbotga.evolver.mutation.CardMutator;
+import com.sjs.lootbotga.evolver.mutation.MoveMutatorImpl;
+import com.sjs.lootbotga.evolver.mutation.MoveTypeMutator;
 import com.sjs.lootbotga.game.Battle;
 import com.sjs.lootbotga.game.cards.Card;
 import com.sjs.lootbotga.game.player.Move;
