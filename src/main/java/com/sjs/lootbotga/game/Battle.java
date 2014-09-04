@@ -5,7 +5,6 @@ import com.sjs.lootbotga.game.player.Player;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * User: StuartS

@@ -3,7 +3,6 @@ package com.sjs.lootbotga.game.player;
 import com.sjs.lootbotga.game.Battle;
 import com.sjs.lootbotga.game.cards.Card;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
