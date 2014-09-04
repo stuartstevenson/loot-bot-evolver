@@ -55,10 +55,10 @@ public class LootBotEvolverImpl implements LootBotEvolver {
 			game.run();
 		}
 
-		return extractPlayerTotals(games);
+		return extractPlayerResults(games);
 	}
 
-	private List<PlayerResult>  extractPlayerTotals(List<Game> games) {
+	private List<PlayerResult> extractPlayerResults(List<Game> games) {
         List<PlayerResult> playerResults = generation
                                                     .stream()
                                                     .map(player -> new PlayerResult(player, START_WINS_VALUE))
