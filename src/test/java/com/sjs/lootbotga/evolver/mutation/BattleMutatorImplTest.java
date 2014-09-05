@@ -27,6 +27,9 @@ public class BattleMutatorImplTest {
     @Mock
     private MerchantCardMutator merchantCardMutator;
 
+    @Mock
+    private AdmiralCardMutator admiralCardMutator;
+
     @Test
     public void shouldMutateMerchantThirdOfTheTime() {
         Battle battle = new Battle();
@@ -43,7 +46,16 @@ public class BattleMutatorImplTest {
 
     @Test
     public void shouldMutateAdmiralThirdOfTheTime() {
+        Battle battle = new Battle();
 
+        Card admiral = new Card(CardType.ADMIRAL, null, null);
+        battle.setAdmiral(admiral);
+
+        when(randomProvider.random()).thenReturn(0.6);
+
+        battleMutator.mutateBattle(battle);
+
+        verify(admiralCardMutator).mutateAdmiral(admiral);
     }
 
     @Test
