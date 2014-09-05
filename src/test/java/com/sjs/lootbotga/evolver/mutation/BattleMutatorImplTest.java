@@ -1,15 +1,20 @@
 package com.sjs.lootbotga.evolver.mutation;
 
 import com.sjs.lootbotga.game.Battle;
-import com.sjs.lootbotga.game.cards.Card;
-import com.sjs.lootbotga.game.cards.CardType;
-import com.sjs.lootbotga.game.cards.MerchantValue;
+import com.sjs.lootbotga.game.cards.*;
+import com.sjs.lootbotga.game.player.Player;
+import com.sjs.lootbotga.game.player.PlayerImpl;
 import com.sjs.lootbotga.provider.RandomProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -29,6 +34,9 @@ public class BattleMutatorImplTest {
 
     @Mock
     private AdmiralCardMutator admiralCardMutator;
+
+    @Mock
+    private FleetsMutator fleetsMutator;
 
     @Test
     public void shouldMutateMerchantThirdOfTheTime() {
@@ -60,7 +68,22 @@ public class BattleMutatorImplTest {
 
     @Test
     public void shouldMutateAFleetThirdOfTheTime() {
+        Battle battle = new Battle();
 
+        Card pirate = new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.ONE);
+        List<Card> fleet = new ArrayList<>();
+        fleet.add(pirate);
+
+        Map<Player, List<Card>> fleets = new HashMap<>();
+        fleets.put(new PlayerImpl(), fleet);
+
+        battle.setFleets(fleets);
+
+        when(randomProvider.random()).thenReturn(0.9);
+
+        battleMutator.mutateBattle(battle);
+
+        verify(fleetsMutator).mutateFleets(battle.getFleets());
     }
 
 }

@@ -17,16 +17,20 @@ public class BattleMutatorImpl implements BattleMutator {
     @Autowired
     private AdmiralCardMutator admiralCardMutator;
 
+    @Autowired
+    private FleetsMutator fleetsMutator;
+
     @Override
     public void mutateBattle(Battle battle) {
-        //todo mutate battle
 
         double random = randomProvider.random();
 
         if (random < 1.0/3.0) {
             battle.setMerchant(merchantCardMutator.mutateMerchant(battle.getMerchant()));
-        }else {
+        } else if (random < 2.0/3.0){
             battle.setAdmiral(admiralCardMutator.mutateAdmiral(battle.getAdmiral()));
+        } else {
+            fleetsMutator.mutateFleets(battle.getFleets());
         }
 
     }
