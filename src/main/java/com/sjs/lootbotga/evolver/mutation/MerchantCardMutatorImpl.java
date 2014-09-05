@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 public class MerchantCardMutatorImpl implements MerchantCardMutator {
     @Override
     public Card mutateMerchant(Card merchant) {
+        //todo mutate merchant
         return null;
     }
 }
