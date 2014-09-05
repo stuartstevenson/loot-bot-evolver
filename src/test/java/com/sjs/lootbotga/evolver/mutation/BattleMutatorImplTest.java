@@ -21,7 +21,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BattleMutatorImplTest {
-    //todo battle mutator test
 
     @Mock
     private RandomProvider randomProvider;
