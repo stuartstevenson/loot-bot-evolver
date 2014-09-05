@@ -11,11 +11,6 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 20:37
- */
 @Component
 public class PlayerCrossoverImpl implements PlayerCrossover {
 

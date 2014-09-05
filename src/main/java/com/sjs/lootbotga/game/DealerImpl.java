@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 20:46
- */
 @Component
 public class DealerImpl implements Dealer {
 

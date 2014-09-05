@@ -9,15 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 20:31
- */
 @Component
 public class PlayerEvolverImpl implements PlayerEvolver {
 
@@ -59,13 +53,11 @@ public class PlayerEvolverImpl implements PlayerEvolver {
                                             .parallelStream()
                                             .filter(p -> p.equals(mother))
                                             .collect(Collectors.toList());
-		Collections.shuffle(filteredPlayers);
-		return filteredPlayers.stream().findFirst().get();
+		return filteredPlayers.stream().findAny().get();
 	}
 
 	private Player getRandonMother(List<Player> selectedPlayers) {
-		Collections.shuffle(selectedPlayers);
-		return selectedPlayers.stream().findFirst().get();
+		return selectedPlayers.stream().findAny().get();
 	}
 	
 	

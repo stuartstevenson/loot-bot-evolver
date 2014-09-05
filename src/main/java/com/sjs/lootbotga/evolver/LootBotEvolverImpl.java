@@ -7,14 +7,11 @@ import com.sjs.lootbotga.game.player.PlayerResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 20:06
- */
 @Component
 public class LootBotEvolverImpl implements LootBotEvolver {
     public static final int NUM_PLAYER = 4;

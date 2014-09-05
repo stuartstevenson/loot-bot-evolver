@@ -7,11 +7,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 19:53
- */
 @Component
 public class LootBotGA {
 	@Autowired

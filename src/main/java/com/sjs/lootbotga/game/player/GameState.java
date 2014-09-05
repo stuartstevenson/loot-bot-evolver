@@ -7,11 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 21:05
- */
 public class GameState {
 	private List<Card> hand;
 	private List<Battle> board;

@@ -8,14 +8,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * User: StuartS
- * Date: 01/04/12
- * Time: 12:14
- */
 @Component
 public class PlayerSelectorImpl implements PlayerSelector {
 	@Autowired

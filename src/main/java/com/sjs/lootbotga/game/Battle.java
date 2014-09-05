@@ -6,12 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 20:48
- */
-@Component
 public class Battle {
 	private Player player;
 	private Card merchant;

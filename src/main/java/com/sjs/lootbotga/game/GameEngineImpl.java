@@ -13,11 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 20:43
- */
 @Component
 public class GameEngineImpl implements GameEngine {
 

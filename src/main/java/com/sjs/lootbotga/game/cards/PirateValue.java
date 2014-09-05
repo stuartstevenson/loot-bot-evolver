@@ -1,10 +1,5 @@
 package com.sjs.lootbotga.game.cards;
 
-/**
- * User: StuartS
- * Date: 27/03/12
- * Time: 19:46
- */
 public enum PirateValue implements CardValue{
 	ONE (1,2),
 	TWO (2,4),

@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 21:15
- */
 @Component
 public class PlayerFactoryImpl implements PlayerFactory {
 	public List<Player> generatePlayers(int numPlayers, int generationCount) {
