@@ -8,4 +8,5 @@ import java.util.List;
 public interface Dealer {
     List<Card> getNewDeck();
     void deal(Table table, List<Player> players);
+    List<Card> getMerchants();
 }
