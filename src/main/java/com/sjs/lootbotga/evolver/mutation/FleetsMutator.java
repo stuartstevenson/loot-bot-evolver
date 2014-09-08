@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface FleetsMutator {
-    void mutateFleets(Map<Player, List<Card>> fleets);
+    Map<Player, List<Card>> mutateFleets(Map<Player, List<Card>> fleets);
 }

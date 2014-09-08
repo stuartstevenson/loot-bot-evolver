@@ -10,7 +10,8 @@ import java.util.Map;
 @Component
 public class FleetsMutatorImpl implements FleetsMutator {
     @Override
-    public void mutateFleets(Map<Player, List<Card>> fleets) {
+    public Map<Player, List<Card>> mutateFleets(Map<Player, List<Card>> fleets) {
         //todo mutate fleets
+        return null;
     }
 }
