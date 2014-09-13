@@ -11,8 +11,6 @@ public class Card {
 	public Card() {
 	}
 
-    //todo Card builders
-
 	public Card(CardType cardType, FleetType fleetType, CardValue value) {
 		this.cardType = cardType;
 		this.fleetType = fleetType;
