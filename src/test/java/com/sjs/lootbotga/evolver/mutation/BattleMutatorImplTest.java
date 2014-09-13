@@ -1,6 +1,8 @@
 package com.sjs.lootbotga.evolver.mutation;
 
 import com.sjs.lootbotga.game.Battle;
+import com.sjs.lootbotga.game.PirateFleet;
+import com.sjs.lootbotga.game.PirateFleetList;
 import com.sjs.lootbotga.game.cards.*;
 import com.sjs.lootbotga.game.player.Player;
 import com.sjs.lootbotga.game.player.PlayerImpl;
@@ -73,8 +75,8 @@ public class BattleMutatorImplTest {
         List<Card> fleet = new ArrayList<>();
         fleet.add(pirate);
 
-        Map<Player, List<Card>> fleets = new HashMap<>();
-        fleets.put(new PlayerImpl(), fleet);
+        PirateFleetList fleets = new PirateFleetList();
+        fleets.add(new PirateFleet(new PlayerImpl(), fleet));
 
         battle.setFleets(fleets);
 

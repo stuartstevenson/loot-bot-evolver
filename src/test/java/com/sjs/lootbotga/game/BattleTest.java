@@ -22,22 +22,25 @@ public class BattleTest {
 		battle1 = new Battle();
 		battle1.setAdmiral(new Card(CardType.ADMIRAL, null, null));
 		battle1.setMerchant(new Card(CardType.MERCHANT, null, MerchantValue.TWO));
-		Map<Player, List<Card>> fleets1 = new HashMap<>();
-		Player player1 = new PlayerImpl();
-		List<Card> hand1 = new ArrayList<>();
-		hand1.add(new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.ONE));
-		fleets1.put(player1, hand1);
-		battle1.setFleets(fleets1);
+
+        PirateFleetList fleetList1 = new PirateFleetList();
+        Player player1 = new PlayerImpl();
+        List<Card> hand1 = new ArrayList<>();
+        hand1.add(new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.ONE));
+        PirateFleet pirateFleet1 = new PirateFleet(player1, hand1);
+        fleetList1.add(pirateFleet1);
+        battle1.setFleets(fleetList1);
 
 		battle2 = new Battle();
 		battle2.setAdmiral(new Card(CardType.ADMIRAL, null, null));
 		battle2.setMerchant(new Card(CardType.MERCHANT, null, MerchantValue.TWO));
-		Map<Player, List<Card>> fleets2 = new HashMap<>();
-		Player player2 = new PlayerImpl();
-		List<Card> hand2 = new ArrayList<>();
-		hand2.add(new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.ONE));
-		fleets2.put(player2, hand2);
-		battle2.setFleets(fleets2);
+        PirateFleetList fleetList2 = new PirateFleetList();
+        Player player2 = new PlayerImpl();
+        List<Card> hand2 = new ArrayList<>();
+        hand2.add(new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.ONE));
+        PirateFleet pirateFleet2 = new PirateFleet(player2, hand2);
+        fleetList2.add(pirateFleet2);
+        battle2.setFleets(fleetList2);
 
 	}
 
@@ -54,12 +57,12 @@ public class BattleTest {
 
     @Test
 	public void testFleetsNotEquals() {
-		Map<Player, List<Card>> fleets3 = new HashMap<>();
+        PirateFleetList pirateFleetList3 = new PirateFleetList();
 		Player player2 = new PlayerImpl();
 		List<Card> hand2 = new ArrayList<>();
 		hand2.add(new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.TWO));
-		fleets3.put(player2, hand2);
-		battle2.setFleets(fleets3);
+		pirateFleetList3.add(new PirateFleet(player2, hand2));
+		battle2.setFleets(pirateFleetList3);
 		assertThat(battle1).isNotEqualTo(battle2);
 	}
 }

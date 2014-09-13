@@ -6,12 +6,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toList;
+
 public class Battle {
 	private Player player;
 	private Card merchant;
 	private Card admiral;
 	private Player currentLeader;
-	private Map<Player, List<Card>> fleets;
+	private PirateFleetList fleets;
 
 	public Battle() {
 	}
@@ -20,7 +22,7 @@ public class Battle {
 		this.player = player;
 		this.merchant = merchant;
 		this.currentLeader = currentLeader;
-		this.fleets = new HashMap<Player, List<Card>>();
+		this.fleets = new PirateFleetList();
 	}
 
 	public Player getCurrentLeader() {
@@ -55,11 +57,11 @@ public class Battle {
 		this.admiral = admiral;
 	}
 
-	public Map<Player, List<Card>> getFleets() {
+	public PirateFleetList getFleets() {
 		return fleets;
 	}
 
-	public void setFleets(Map<Player, List<Card>> fleets) {
+	public void setFleets(PirateFleetList fleets) {
 		this.fleets = fleets;
 	}
 
@@ -73,19 +75,14 @@ public class Battle {
 		if (admiral != null ? !admiral.equals(battle.admiral) : battle.admiral != null) return false;
 		if (merchant != null ? !merchant.equals(battle.merchant) : battle.merchant != null) return false;
 		
-		Set<Set<Card>> thisCardSet = new HashSet<Set<Card>>();
 		if (fleets == null && battle.getFleets() == null ) {
 			return true;
 		}
-		for (List<Card> cards : fleets.values()) {
-			thisCardSet.add(new HashSet<Card>(cards));
-		}
-		Set<Set<Card>> thatCardSet = new HashSet<Set<Card>>();
-		for (List<Card> cards : battle.getFleets().values()) {
-			 thatCardSet.add(new HashSet<Card>(cards));
-		}
 
-        return thisCardSet.equals(thatCardSet);
+        List<Card> thisBattleCards = fleets.stream().flatMap(pirateFleet -> pirateFleet.getHand().stream()).collect(toList());
+        List<Card> thatBattleCards = battle.getFleets().stream().flatMap(pirateFleet -> pirateFleet.getHand().stream()).collect(toList());
+
+        return thisBattleCards.equals(thatBattleCards);
     }
 
 	@Override

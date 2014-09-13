@@ -1,6 +1,8 @@
 package com.sjs.lootbotga.game.player;
 
 import com.sjs.lootbotga.game.Battle;
+import com.sjs.lootbotga.game.PirateFleet;
+import com.sjs.lootbotga.game.PirateFleetList;
 import com.sjs.lootbotga.game.Table;
 import com.sjs.lootbotga.game.cards.Card;
 import com.sjs.lootbotga.game.cards.CardType;
@@ -26,11 +28,10 @@ public class MoveFactory {
 		}
 		else if (card.getCardType().equals(CardType.CAPTAIN)) {
 			for (Battle battle : table.getBattleList()){
-                allMoves.addAll(battle.getFleets().entrySet()
-                                                    .stream()
-                                                    .filter(fleet -> fleet.getKey().equals(player))
-                                                    .map(fleet -> new Move(card, MoveType.PLAY, battle))
-                                                    .collect(Collectors.toList()));
+                allMoves.addAll(battle.getFleets().stream()
+                        .filter(fleet -> fleet.getPlayer().equals(player))
+                        .map(fleet -> new Move(card, MoveType.PLAY, battle))
+                        .collect(Collectors.toList()));
 			}
 		}
 		else if (card.getCardType().equals(CardType.MERCHANT)) {
@@ -41,11 +42,11 @@ public class MoveFactory {
 				allMoves.add(new Move(card, MoveType.DISCARD, null));
 			}
 			for (Battle battle : table.getBattleList()){
-				if (!battle.getFleets().containsKey(player) && !fleetTypeAlreadyPlayed(card.getFleetType(), battle.getFleets())) {
+				if (!battle.getFleets().getBy(player).isPresent() && !fleetTypeAlreadyPlayed(card.getFleetType(), battle.getFleets())) {
 					allMoves.add(new Move(card,MoveType.PLAY,battle));
 				}
-				if (battle.getFleets().containsKey(player)) {
-					if (battle.getFleets().get(player).get(0).equals(card.getFleetType())){
+				if (battle.getFleets().getBy(player).isPresent()) {
+					if (battle.getFleets().getBy(player).get().getHand().get(0).getFleetType().equals(card.getFleetType())){
 						allMoves.add(new Move(card, MoveType.PLAY, battle));
 					}
 				}
@@ -54,9 +55,9 @@ public class MoveFactory {
 		return allMoves;
 	}
 
-	private static boolean fleetTypeAlreadyPlayed(FleetType fleetType, Map<Player, List<Card>> fleets) {
-		for (Map.Entry<Player, List<Card>> playerListEntry : fleets.entrySet()) {
-			if (playerListEntry.getValue().get(0).getFleetType().equals(fleetType)){
+	private static boolean fleetTypeAlreadyPlayed(FleetType fleetType, PirateFleetList fleets) {
+		for (PirateFleet playerListEntry : fleets) {
+			if (playerListEntry.getHand().get(0).getFleetType().equals(fleetType)){
 				return true;
 			}
 		}

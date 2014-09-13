@@ -86,9 +86,9 @@ public class GameEngineImpl implements GameEngine {
 		else {
 			if (battle.getAdmiral() ==  null){
 				Map<Player, Integer> playerScore = new HashMap<Player, Integer>();
-				for (Map.Entry<Player, List<Card>> fleet: battle.getFleets().entrySet()) {
+				for (PirateFleet fleet: battle.getFleets()) {
 					Integer score = 0;
-					for (Card ship : fleet.getValue()) {
+					for (Card ship : fleet.getHand()) {
 						if (ship.getCardType().equals(CardType.CAPTAIN)) {
 							score = 10000;
 							break;
@@ -115,13 +115,13 @@ public class GameEngineImpl implements GameEngine {
 	}
 
 	private void addToFleet(Player player, Card card, Battle battle) {
-		if (battle.getFleets().containsKey(player)) {
-			battle.getFleets().get(player).add(card);
+		if (battle.getFleets().getBy(player).isPresent()) {
+			battle.getFleets().getBy(player).get().getHand().add(card);
 		}
 		else {
 			List<Card> newFleet = new ArrayList<Card>();
 			newFleet.add(card);
-			battle.getFleets().put(player, newFleet);
+            battle.getFleets().add(new PirateFleet(player, newFleet));
 		}
 	}
 
