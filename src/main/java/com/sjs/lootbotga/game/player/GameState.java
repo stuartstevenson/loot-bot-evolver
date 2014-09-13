@@ -49,13 +49,9 @@ public class GameState {
 
 		GameState gameState = (GameState) o;
 
-		Set<Card> thisCardSet = new HashSet<Card>(this.getHand());
-		Set<Card> thatCardSet = new HashSet<Card>(gameState.getHand());
-		if (!thisCardSet.equals(thatCardSet)) return false;
-		
-		Set<Battle> thisBattleSet = new HashSet<Battle>(this.getBoard());
-		Set<Battle> thatBattleSet = new HashSet<Battle>(gameState.getBoard());
-		if (!thisBattleSet.equals(thatBattleSet)) return false;
+        if (!this.getHand().equals(gameState.getHand())) return false;
+
+        if (!this.getBoard().equals(gameState.getBoard())) return false;
 
 		if (deckEmpty != gameState.isDeckEmpty()) return false;
 
