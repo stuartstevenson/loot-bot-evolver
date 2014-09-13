@@ -67,7 +67,7 @@ public class GameStateTest {
 
     @Test
 	public void testHandNotEquals() {
-		gameState2.getHand().add(new Card(CardType.PIRATE, FleetType.GREEN, PirateValue.ONE));
+		gameState2.getHand().add(new PirateCardBuilder().fleet(FleetType.GREEN).value(PirateValue.ONE).build());
 		assertThat(gameState1).isNotEqualTo(gameState2);
 	}
 
@@ -75,13 +75,13 @@ public class GameStateTest {
 	public void testBoardNotEquals() {
 		List<Battle> battleList3 = new ArrayList<Battle>();
 		Battle battle3 = new Battle();
-		battle3.setMerchant(new Card(CardType.MERCHANT, null, MerchantValue.TWO));
+		battle3.setMerchant(new MerchantCardBuilder().value(MerchantValue.TWO).build());
 
         PirateFleetList pirateFleetList3 = new PirateFleetList();
 
 		Player player3 = new PlayerImpl();
 		List<Card> fleet3 = new ArrayList<Card>();
-		fleet3.add(new Card(CardType.PIRATE, FleetType.GREEN, PirateValue.THREE));
+		fleet3.add(new PirateCardBuilder().fleet(FleetType.GREEN).value(PirateValue.THREE).build());
 		pirateFleetList3.add(new PirateFleet(player3, fleet3));
 		battle3.setFleets(pirateFleetList3);
 		battleList3.add(battle3);
