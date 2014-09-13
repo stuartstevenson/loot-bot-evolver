@@ -30,7 +30,7 @@ public class BattleMutatorImpl implements BattleMutator {
         } else if (random < 2.0/3.0){
             battle.setAdmiral(admiralCardMutator.mutateAdmiral(battle.getAdmiral()));
         } else {
-            fleetsMutator.mutateFleets(battle.getFleets());
+            battle.setFleets(fleetsMutator.mutateFleets(battle.getFleets()));
         }
 
     }

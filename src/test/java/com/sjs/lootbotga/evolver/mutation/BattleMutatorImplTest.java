@@ -82,7 +82,7 @@ public class BattleMutatorImplTest {
 
         battleMutator.mutateBattle(battle);
 
-        verify(fleetsMutator).mutateFleets(battle.getFleets());
+        verify(fleetsMutator).mutateFleets(fleets);
     }
 
 }
