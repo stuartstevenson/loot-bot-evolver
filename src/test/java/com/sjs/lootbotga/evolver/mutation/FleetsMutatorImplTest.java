@@ -20,6 +20,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.fest.util.Lists.newArrayList;
 
@@ -56,17 +57,30 @@ public class FleetsMutatorImplTest {
         Map<Player, List<Card>> fleets = players.stream().collect(Collectors.toMap(player -> player, player -> {
             FleetType fleetType = fleetTypes.remove(0);
 
-            List<Card> fleetCards = pirateCards.stream().filter(pc -> pc.getFleetType().equals(fleetType)).collect(Collectors.toList());
+            List<Card> fleetCards = pirateCards.stream().filter(pc -> pc.getFleetType().equals(fleetType)).collect(toList());
             Collections.shuffle(fleetCards);
 
             return fleetCards.subList(0, 1);
         }));
 
-        for (Map.Entry<Player, List<Card>> playerListEntry : fleets.entrySet()) {
-            pirateFleetList.add(new PirateFleet(playerListEntry.getKey(), playerListEntry.getValue()));
-        }
+        pirateFleetList.addAll(fleets.entrySet()
+                                        .stream()
+                                        .map(playerListEntry -> new PirateFleet(playerListEntry.getKey(), playerListEntry.getValue()))
+                                        .collect(Collectors.toList()));
 
-        fleetsMutator.mutateFleets(pirateFleetList);
+        List<Card> pirateFleetCards = pirateFleetList
+                .stream()
+                .flatMap(pirateFleet -> pirateFleet.getHand().stream())
+                .collect(toList());
+
+        PirateFleetList mutatedPirateFleetList = fleetsMutator.mutateFleets(pirateFleetList);
+
+        List<Card> mutatedPirateFleetCards = mutatedPirateFleetList
+                                                .stream()
+                                                .flatMap(pirateFleet -> pirateFleet.getHand().stream())
+                                                .collect(toList());
+
+        assertThat(pirateFleetCards).isNotEqualTo(mutatedPirateFleetCards);
     }
 
 }
