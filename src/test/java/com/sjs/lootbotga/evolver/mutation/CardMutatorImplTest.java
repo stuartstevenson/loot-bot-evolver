@@ -1,9 +1,6 @@
 package com.sjs.lootbotga.evolver.mutation;
 
-import com.sjs.lootbotga.game.cards.Card;
-import com.sjs.lootbotga.game.cards.CardType;
-import com.sjs.lootbotga.game.cards.FleetType;
-import com.sjs.lootbotga.game.cards.PirateValue;
+import com.sjs.lootbotga.game.cards.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -19,7 +16,7 @@ public class CardMutatorImplTest {
 
     @Test
     public void shouldNotBeTheSameCard() {
-        Card card = new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.ONE);
+        Card card = new PirateCardBuilder().fleet(FleetType.BLUE).value(PirateValue.ONE).build();
 
         Card newCard = cardMutator.mutateCard(card);
 

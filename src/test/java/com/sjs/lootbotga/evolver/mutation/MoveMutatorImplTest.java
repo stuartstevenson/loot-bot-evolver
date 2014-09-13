@@ -2,6 +2,7 @@ package com.sjs.lootbotga.evolver.mutation;
 
 import com.sjs.lootbotga.game.Battle;
 import com.sjs.lootbotga.game.cards.Card;
+import com.sjs.lootbotga.game.cards.PirateCardBuilder;
 import com.sjs.lootbotga.game.player.Move;
 import com.sjs.lootbotga.game.player.MoveType;
 import com.sjs.lootbotga.provider.RandomProvider;
@@ -36,7 +37,7 @@ public class MoveMutatorImplTest {
 
         Battle battle = new Battle();
 
-        Move move = new Move(new Card(), MoveType.PLAY, battle);
+        Move move = new Move(new PirateCardBuilder().build(), MoveType.PLAY, battle);
 
         when(randomProvider.random()).thenReturn(0.8);
         moveMutator.mutateMove(move);
@@ -50,7 +51,7 @@ public class MoveMutatorImplTest {
         Battle battle = new Battle();
         MoveType moveType = MoveType.PLAY;
 
-        Move move = new Move(new Card(), moveType, battle);
+        Move move = new Move(new PirateCardBuilder().build(), moveType, battle);
 
         when(randomProvider.random()).thenReturn(0.6);
         moveMutator.mutateMove(move);
@@ -62,7 +63,7 @@ public class MoveMutatorImplTest {
     public void shouldMutateCardThirdOfTheTime() {
         Battle battle = new Battle();
         MoveType moveType = MoveType.PLAY;
-        Card card = new Card();
+        Card card = new PirateCardBuilder().build();
 
         Move move = new Move(card, moveType, battle);
 

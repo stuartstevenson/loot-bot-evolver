@@ -5,6 +5,7 @@ import com.sjs.lootbotga.evolver.mutation.MoveMutator;
 import com.sjs.lootbotga.evolver.mutation.PlayerMutatorImpl;
 import com.sjs.lootbotga.game.Battle;
 import com.sjs.lootbotga.game.cards.Card;
+import com.sjs.lootbotga.game.cards.PirateCardBuilder;
 import com.sjs.lootbotga.game.player.*;
 import com.sjs.lootbotga.provider.RandomProvider;
 import org.junit.Test;
@@ -54,7 +55,7 @@ public class PlayerMutatorImplTest {
 
         Player player = new PlayerImpl();
         Map<GameState, Move> playerStrategy = new HashMap<GameState, Move>();
-        playerStrategy.put(new GameState(Collections.<Card>emptyList(), Collections.<Battle>emptyList(), false), new Move(new Card(), MoveType.PLAY, new Battle()));
+        playerStrategy.put(new GameState(Collections.<Card>emptyList(), Collections.<Battle>emptyList(), false), new Move(new PirateCardBuilder().build(), MoveType.PLAY, new Battle()));
         player.setStrategy(playerStrategy);
 
         when(randomProvider.random()).thenReturn(0.5);
@@ -68,7 +69,7 @@ public class PlayerMutatorImplTest {
     public void shouldMutateGameState50PercentOfTheTime() {
         Player player = new PlayerImpl();
         Map<GameState, Move> playerStrategy = new HashMap<GameState, Move>();
-        playerStrategy.put(new GameState(Collections.<Card>emptyList(), Collections.<Battle>emptyList(), false), new Move(new Card(), MoveType.PLAY, new Battle()));
+        playerStrategy.put(new GameState(Collections.<Card>emptyList(), Collections.<Battle>emptyList(), false), new Move(new PirateCardBuilder().build(), MoveType.PLAY, new Battle()));
         player.setStrategy(playerStrategy);
 
         when(randomProvider.random()).thenReturn(0.6);

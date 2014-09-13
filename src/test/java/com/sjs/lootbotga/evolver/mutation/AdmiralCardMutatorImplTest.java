@@ -1,5 +1,6 @@
 package com.sjs.lootbotga.evolver.mutation;
 
+import com.sjs.lootbotga.game.cards.AdmiralCardBuilder;
 import com.sjs.lootbotga.game.cards.Card;
 import com.sjs.lootbotga.game.cards.CardType;
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class AdmiralCardMutatorImplTest {
 
     @Test
     public void shouldRemoveAdmiralIfPresent() {
-        Card admiral = new Card(CardType.ADMIRAL, null, null);
+        Card admiral = new AdmiralCardBuilder().build();
 
         assertThat(admiralCardMutator.mutateAdmiral(admiral)).isNull();
     }

@@ -1,10 +1,7 @@
 package com.sjs.lootbotga.evolver.mutation;
 
 import com.sjs.lootbotga.game.PirateFleetList;
-import com.sjs.lootbotga.game.cards.Card;
-import com.sjs.lootbotga.game.cards.CardType;
-import com.sjs.lootbotga.game.cards.CardValue;
-import com.sjs.lootbotga.game.cards.PirateValue;
+import com.sjs.lootbotga.game.cards.*;
 import com.sjs.lootbotga.game.player.Player;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +23,7 @@ public class FleetsMutatorImpl implements FleetsMutator {
             int randomCardValue = new Random().nextInt(newFleetList.get(randomFleetValue).getHand().size());
 
             Card card = newFleetList.get(randomFleetValue).getHand().remove(randomCardValue);
-            Card newCard = new Card(CardType.PIRATE, card.getFleetType(), getRandomCardValue(card.getValue()));
+            Card newCard = new PirateCardBuilder().fleet(card.getFleetType()).value((PirateValue)getRandomCardValue(card.getValue())).build();
 
 
             newFleetList.get(randomFleetValue).getHand().add(randomCardValue, newCard);

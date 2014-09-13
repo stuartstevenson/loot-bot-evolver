@@ -1,5 +1,6 @@
 package com.sjs.lootbotga.evolver.mutation;
 
+import com.sjs.lootbotga.game.cards.AdmiralCardBuilder;
 import com.sjs.lootbotga.game.cards.Card;
 import com.sjs.lootbotga.game.cards.CardType;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,7 @@ public class AdmiralCardMutatorImpl implements AdmiralCardMutator {
         Card returnCard = null;
 
         if (admiral == null) {
-            returnCard = new Card(CardType.ADMIRAL, null, null);
+            returnCard = new AdmiralCardBuilder().build();
         }
         return returnCard;
     }

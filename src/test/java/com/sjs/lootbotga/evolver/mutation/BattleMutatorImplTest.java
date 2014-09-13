@@ -43,7 +43,7 @@ public class BattleMutatorImplTest {
     public void shouldMutateMerchantThirdOfTheTime() {
         Battle battle = new Battle();
 
-        Card merchant = new Card(CardType.MERCHANT, null, MerchantValue.TWO);
+        Card merchant = new MerchantCardBuilder().value(MerchantValue.TWO).build();
         battle.setMerchant(merchant);
 
         when(randomProvider.random()).thenReturn(0.3);
@@ -57,7 +57,7 @@ public class BattleMutatorImplTest {
     public void shouldMutateAdmiralThirdOfTheTime() {
         Battle battle = new Battle();
 
-        Card admiral = new Card(CardType.ADMIRAL, null, null);
+        Card admiral = new AdmiralCardBuilder().build();
         battle.setAdmiral(admiral);
 
         when(randomProvider.random()).thenReturn(0.6);
@@ -71,7 +71,7 @@ public class BattleMutatorImplTest {
     public void shouldMutateAFleetThirdOfTheTime() {
         Battle battle = new Battle();
 
-        Card pirate = new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.ONE);
+        Card pirate = new PirateCardBuilder().fleet(FleetType.BLUE).value(PirateValue.ONE).build();
         List<Card> fleet = new ArrayList<>();
         fleet.add(pirate);
 

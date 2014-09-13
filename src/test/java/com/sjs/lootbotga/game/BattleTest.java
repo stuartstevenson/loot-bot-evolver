@@ -20,24 +20,24 @@ public class BattleTest {
     @Before
 	public void setUp() throws Exception {
 		battle1 = new Battle();
-		battle1.setAdmiral(new Card(CardType.ADMIRAL, null, null));
-		battle1.setMerchant(new Card(CardType.MERCHANT, null, MerchantValue.TWO));
+		battle1.setAdmiral(new AdmiralCardBuilder().build());
+		battle1.setMerchant(new MerchantCardBuilder().value(MerchantValue.TWO).build());
 
         PirateFleetList fleetList1 = new PirateFleetList();
         Player player1 = new PlayerImpl();
         List<Card> hand1 = new ArrayList<>();
-        hand1.add(new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.ONE));
+        hand1.add(new PirateCardBuilder().fleet(FleetType.BLUE).value(PirateValue.ONE).build());
         PirateFleet pirateFleet1 = new PirateFleet(player1, hand1);
         fleetList1.add(pirateFleet1);
         battle1.setFleets(fleetList1);
 
 		battle2 = new Battle();
-		battle2.setAdmiral(new Card(CardType.ADMIRAL, null, null));
-		battle2.setMerchant(new Card(CardType.MERCHANT, null, MerchantValue.TWO));
+		battle2.setAdmiral(new AdmiralCardBuilder().build());
+		battle2.setMerchant(new MerchantCardBuilder().value(MerchantValue.TWO).build());
         PirateFleetList fleetList2 = new PirateFleetList();
         Player player2 = new PlayerImpl();
         List<Card> hand2 = new ArrayList<>();
-        hand2.add(new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.ONE));
+        hand2.add(new PirateCardBuilder().fleet(FleetType.BLUE).value(PirateValue.ONE).build());
         PirateFleet pirateFleet2 = new PirateFleet(player2, hand2);
         fleetList2.add(pirateFleet2);
         battle2.setFleets(fleetList2);
@@ -51,7 +51,7 @@ public class BattleTest {
 
     @Test
 	public void testMerchantNotEquals() {
-		battle2.setMerchant(new Card(CardType.MERCHANT, null, MerchantValue.EIGHT));
+		battle2.setMerchant(new MerchantCardBuilder().value(MerchantValue.EIGHT).build());
 		assertThat(battle1).isNotEqualTo(battle2);
 	}
 
@@ -60,7 +60,7 @@ public class BattleTest {
         PirateFleetList pirateFleetList3 = new PirateFleetList();
 		Player player2 = new PlayerImpl();
 		List<Card> hand2 = new ArrayList<>();
-		hand2.add(new Card(CardType.PIRATE, FleetType.BLUE, PirateValue.TWO));
+		hand2.add(new PirateCardBuilder().fleet(FleetType.BLUE).value(PirateValue.TWO).build());
 		pirateFleetList3.add(new PirateFleet(player2, hand2));
 		battle2.setFleets(pirateFleetList3);
 		assertThat(battle1).isNotEqualTo(battle2);

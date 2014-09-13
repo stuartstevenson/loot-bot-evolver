@@ -4,6 +4,7 @@ import com.sjs.lootbotga.game.Dealer;
 import com.sjs.lootbotga.game.DealerImpl;
 import com.sjs.lootbotga.game.cards.Card;
 import com.sjs.lootbotga.game.cards.CardType;
+import com.sjs.lootbotga.game.cards.MerchantCardBuilder;
 import com.sjs.lootbotga.game.cards.MerchantValue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ public class MerchantCardMutatorImplTest {
 
     @Test
     public void an8CoinShipCannotMutateIntoAn8CoinShip() {
-        Card eightCoinMerchant = new Card(CardType.MERCHANT, null, MerchantValue.EIGHT);
+        Card eightCoinMerchant = new MerchantCardBuilder().value(MerchantValue.EIGHT).build();
 
         Card mutatedCard = merchantCardMutator.mutateMerchant(eightCoinMerchant);
 
