@@ -1,6 +1,6 @@
 package com.sjs.lootbotga.game.cards;
 
-public class PirateCardBuilder {
+public class PirateCardBuilder implements Cardbuilder {
     private FleetType fleetType;
     private PirateValue pirateValue;
 
