@@ -39,10 +39,7 @@ public class GameStateTest {
 		gameState1 = new GameState(hand1, battleList1, false);
 
 		List<Card> hand2 = new ArrayList<Card>();
-		Card card2 = new Card();
-		card2.setCardType(CardType.PIRATE);
-		card2.setFleetType(FleetType.BLUE);
-		card2.setValue(PirateValue.ONE);
+		Card card2 = new PirateCardBuilder().fleet(FleetType.BLUE).value(PirateValue.ONE).build();
 		hand2.add(card2);
 		List<Battle> battleList2 = new ArrayList<Battle>();
 		Battle battle2 = new Battle();
