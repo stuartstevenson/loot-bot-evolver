@@ -23,19 +23,16 @@ public class GameStateTest {
     @Before
 	public void setUp() throws Exception {
 		List<Card> hand1 = new ArrayList<Card>();
-		Card card1 = new Card();
-		card1.setCardType(CardType.PIRATE);
-		card1.setFleetType(FleetType.BLUE);
-		card1.setValue(PirateValue.ONE);
+		Card card1 = new PirateCardBuilder().fleet(FleetType.BLUE).value(PirateValue.ONE).build();
 		hand1.add(card1);
 		List<Battle> battleList1 = new ArrayList<Battle>();
 		Battle battle1 = new Battle();
-		battle1.setMerchant(new Card(CardType.MERCHANT, null, MerchantValue.TWO));
+		battle1.setMerchant(new MerchantCardBuilder().value(MerchantValue.TWO).build());
 
         PirateFleetList pirateFleetList1 = new PirateFleetList();
 		Player player1 = new PlayerImpl();
 		List<Card> fleet1 = new ArrayList<Card>();
-		fleet1.add(new Card(CardType.PIRATE, FleetType.GREEN, PirateValue.TWO));
+		fleet1.add(new PirateCardBuilder().fleet(FleetType.GREEN).value(PirateValue.TWO).build());
 		pirateFleetList1.add(new PirateFleet(player1, fleet1));
 		battle1.setFleets(pirateFleetList1);
 		battleList1.add(battle1);
@@ -49,11 +46,11 @@ public class GameStateTest {
 		hand2.add(card2);
 		List<Battle> battleList2 = new ArrayList<Battle>();
 		Battle battle2 = new Battle();
-		battle2.setMerchant(new Card(CardType.MERCHANT, null, MerchantValue.TWO));
+		battle2.setMerchant(new MerchantCardBuilder().value(MerchantValue.TWO).build());
 		PirateFleetList pirateFleetList2 = new PirateFleetList();
 		Player player2 = new PlayerImpl();
 		List<Card> fleet2 = new ArrayList<Card>();
-		fleet2.add(new Card(CardType.PIRATE, FleetType.GREEN, PirateValue.TWO));
+		fleet2.add(new PirateCardBuilder().fleet(FleetType.GREEN).value(PirateValue.TWO).build());
 		pirateFleetList2.add(new PirateFleet(player2, fleet2));
 		battle2.setFleets(pirateFleetList2);
 		battleList2.add(battle2);
