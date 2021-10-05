@@ -3,3 +3,7 @@
 *.iml
 
 target/
+
+build/
+
+.gradle/
