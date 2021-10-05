@@ -3,11 +3,6 @@ package com.sjs.lootbotga.game.player;
 import com.sjs.lootbotga.game.Battle;
 import com.sjs.lootbotga.game.cards.Card;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 21:04
- */
 public class Move {
 	private Card card;
 	private MoveType moveType;

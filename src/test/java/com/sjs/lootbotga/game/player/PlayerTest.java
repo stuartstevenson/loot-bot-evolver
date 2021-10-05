@@ -1,13 +1,12 @@
 package com.sjs.lootbotga.game.player;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-/**
- * User: StuartS
- * Date: 01/04/12
- * Time: 10:32
- */
-public class PlayerTest extends TestCase{
+import static org.fest.assertions.api.Assertions.assertThat;
+
+public class PlayerTest {
+
+    @Test
 	public void testEquals() {
 		PlayerImpl player1 = new PlayerImpl();
 		PlayerImpl player2 = new PlayerImpl();
@@ -15,8 +14,10 @@ public class PlayerTest extends TestCase{
 		player1.setId(101);
 		player2.setId(101);
 
-		assertTrue(player1.equals(player2));
+		assertThat(player1).isEqualTo(player2);
 	}
+
+    @Test
 	
 	public void testNotEquals() {
 		PlayerImpl player1 = new PlayerImpl();
@@ -25,6 +26,6 @@ public class PlayerTest extends TestCase{
 		player1.setId(101);
 		player2.setId(102);
 
-		assertFalse(player1.equals(player2));
+		assertThat(player1).isNotEqualTo(player2);
 	}
 }

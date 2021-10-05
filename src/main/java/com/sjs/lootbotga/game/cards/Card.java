@@ -2,11 +2,6 @@ package com.sjs.lootbotga.game.cards;
 
 import org.springframework.stereotype.Component;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 20:48
- */
 @Component
 public class Card {
 	private CardType cardType;

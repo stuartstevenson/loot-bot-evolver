@@ -5,12 +5,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 20:44
- */
-@Component
 public class Table {
 	private List<Battle> battleList;
 	private List<Card> deck;

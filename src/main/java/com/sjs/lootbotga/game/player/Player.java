@@ -6,11 +6,6 @@ import com.sjs.lootbotga.game.cards.Card;
 import java.util.List;
 import java.util.Map;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 20:09
- */
 public interface Player {
 	Integer getId();
 

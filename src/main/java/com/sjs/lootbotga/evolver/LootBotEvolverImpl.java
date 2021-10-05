@@ -1,26 +1,22 @@
 package com.sjs.lootbotga.evolver;
 
+import com.sjs.lootbotga.game.Game;
 import com.sjs.lootbotga.game.player.Player;
 import com.sjs.lootbotga.game.player.PlayerFactory;
-import com.sjs.lootbotga.game.Game;
-import com.sjs.lootbotga.utils.CollectionFilter;
-import com.sjs.lootbotga.utils.CollectionUtils;
+import com.sjs.lootbotga.game.player.PlayerResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 20:06
- */
 @Component
 public class LootBotEvolverImpl implements LootBotEvolver {
-	@Autowired
+    public static final int NUM_PLAYER = 4;
+    public static final int START_WINS_VALUE = 0;
+    @Autowired
 	private PlayerFactory playerFactory;
 	@Autowired
 	private List<Player> generation;
@@ -38,54 +34,60 @@ public class LootBotEvolverImpl implements LootBotEvolver {
 	}
 
 	public void run() {
-		generation = playerFactory.generatePlayers(4, generationCount);
+		generation = playerFactory.generatePlayers(NUM_PLAYER, generationCount);
 		int i = 0;
 		while (i < generationCount) {
-			Map<Player, Integer> playerMap = playGames();
-			generation = playerEvolver.nextGeneration(generation, playerMap, i++);
+            List<PlayerResult> playerResults = playGames();
+			generation = playerEvolver.nextGeneration(generation, playerResults, i++);
 		}
 	}
 
-	private Map<Player, Integer> playGames() {
-		List<Game> games = new ArrayList<Game>();
-		for (Player player : generation) {
-			games.add(playGame(player));
-		}
-		for (Game game : games) {
+	private List<PlayerResult> playGames() {
+		List<Game> games = generation
+                                .stream()
+                                .map(this::playGame)
+                                .collect(Collectors.toList());
+
+        for (Game game : games) {
 			game.run();
 		}
 
-		return extractPlayerTotals(games);
+		return extractPlayerResults(games);
 	}
 
-	private Map<Player, Integer> extractPlayerTotals(List<Game> games) {
-		Map<Player, Integer> playerWins = new HashMap<Player, Integer>();
-		for (Player player : generation) {
-			playerWins.put(player, 0);
+	private List<PlayerResult> extractPlayerResults(List<Game> games) {
+        List<PlayerResult> playerResults = generation
+                                                    .stream()
+                                                    .map(player -> new PlayerResult(player, START_WINS_VALUE))
+                                                    .collect(Collectors.toList());
+
+        for (Game game : games) {
+            findPlayerIn(playerResults, game.winner()).incrementWin();
 		}
-		for (Game game : games) {
-			if (playerWins.containsKey(game.winner())){
-				Integer wins = playerWins.get(game.winner());
-				playerWins.put(game.winner(), wins++);
-			}
-		}
-		return playerWins;
+
+		return playerResults;
 	}
 
-	private Game playGame(Player player) {
+    private PlayerResult findPlayerIn(List<PlayerResult> playerResults, Player winner) {
+        return playerResults
+                .stream()
+                .filter(p -> p.getPlayer().equals(winner))
+                .findFirst()
+                .get();
+    }
+
+    private Game playGame(Player player) {
 		List<Player> players = new ArrayList<Player>();
 		players.add(player);
 		players.addAll(getOtherPlayers(player));
-		Game game = new Game(players);
-		return game;
+		return new Game(players);
 	}
 
 	private List<Player> getOtherPlayers(final Player player) {
-		List<Player> otherPlayers = CollectionUtils.filter(generation, new CollectionFilter<Player>() {
-			public boolean filterOut(Player player1) {
-				return player1.equals(player);
-			}
-		});
+        List<Player> otherPlayers = generation
+                                        .stream()
+                                        .filter(p -> !p.equals(player))
+                                        .collect(Collectors.toList());
 		Collections.shuffle(otherPlayers);
 		return otherPlayers.subList(0,3);
 	}

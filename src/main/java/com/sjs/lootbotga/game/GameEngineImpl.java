@@ -5,7 +5,7 @@ import com.sjs.lootbotga.game.cards.CardType;
 import com.sjs.lootbotga.game.player.Move;
 import com.sjs.lootbotga.game.player.MoveType;
 import com.sjs.lootbotga.game.player.Player;
-import com.sjs.lootbotga.game.player.PlayerFactoryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,18 +13,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 20:43
- */
 @Component
 public class GameEngineImpl implements GameEngine {
+
+    private Dealer dealer = new DealerImpl();
+
 	private Table table = new Table();
 	private List<Player> players;
 
 	public void playGame() {
-		Dealer.deal(table, players);
+		dealer.deal(table, players);
 		boolean endgame = false;
 		do {
 			for (Player player : players) {
@@ -42,12 +40,13 @@ public class GameEngineImpl implements GameEngine {
 
 	private void checkBattlesForWin(Player player) {
 		List<Battle> battlesWon = new ArrayList<Battle>();
-		for (Battle battle : table.getBattleList()) {
-			if (battle.getCurrentLeader().equals(player)) {
-				battlesWon.add(battle);
-				player.getBooty().add(battle.getMerchant());
-			}
-		}
+        table.getBattleList()
+                .stream()
+                .filter(battle -> battle.getCurrentLeader().equals(player))
+                .forEach(battle -> {
+                    battlesWon.add(battle);
+                    player.getBooty().add(battle.getMerchant());
+                });
 		table.getBattleList().removeAll(battlesWon);
 	}
 
@@ -87,9 +86,9 @@ public class GameEngineImpl implements GameEngine {
 		else {
 			if (battle.getAdmiral() ==  null){
 				Map<Player, Integer> playerScore = new HashMap<Player, Integer>();
-				for (Map.Entry<Player, List<Card>> fleet: battle.getFleets().entrySet()) {
+				for (PirateFleet fleet: battle.getFleets()) {
 					Integer score = 0;
-					for (Card ship : fleet.getValue()) {
+					for (Card ship : fleet.getHand()) {
 						if (ship.getCardType().equals(CardType.CAPTAIN)) {
 							score = 10000;
 							break;
@@ -116,30 +115,30 @@ public class GameEngineImpl implements GameEngine {
 	}
 
 	private void addToFleet(Player player, Card card, Battle battle) {
-		if (battle.getFleets().containsKey(player)) {
-			battle.getFleets().get(player).add(card);
+		if (battle.getFleets().getBy(player).isPresent()) {
+			battle.getFleets().getBy(player).get().getHand().add(card);
 		}
 		else {
 			List<Card> newFleet = new ArrayList<Card>();
 			newFleet.add(card);
-			battle.getFleets().put(player, newFleet);
+            battle.getFleets().add(new PirateFleet(player, newFleet));
 		}
 	}
 
 	public void setup(List<Player> playerList) {
-		table.setDeck(Dealer.getNewDeck());
+		table.setDeck(dealer.getNewDeck());
 		players = playerList;
 		table.setDiscards(new ArrayList<Card>());
 		table.setBattleList(new ArrayList<Battle>());
 	}
 
-	public static void main(String[] args) {
-		List<Player> players = new PlayerFactoryImpl().generatePlayers(4, 1);
-		GameEngine gameEngine = new GameEngineImpl();
-		gameEngine.setup(players);
-		gameEngine.playGame();
-		for (Player player : players) {
-			System.out.println(player.getId());
-		}
-	}
+//	public static void main(String[] args) {
+//		List<Player> players = new PlayerFactoryImpl().generatePlayers(4, 1);
+//		GameEngine gameEngine = new GameEngineImpl();
+//		gameEngine.setup(players);
+//		gameEngine.playGame();
+//		for (Player player : players) {
+//			System.out.println(player.getId());
+//		}
+//	}
 }

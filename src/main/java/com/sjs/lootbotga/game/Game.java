@@ -8,14 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 20:20
- */
-@Component
 public class Game implements Runnable {
 	private GameEngine gameEngine;
 	private List<Player> playerList;

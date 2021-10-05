@@ -1,29 +1,81 @@
 package com.sjs.lootbotga.evolver;
 
-import com.sjs.lootbotga.game.player.GameState;
-import com.sjs.lootbotga.game.player.Move;
-import com.sjs.lootbotga.game.player.Player;
-import com.sjs.lootbotga.game.player.PlayerImpl;
-import junit.framework.TestCase;
+import com.sjs.lootbotga.evolver.mutation.GameStateMutator;
+import com.sjs.lootbotga.evolver.mutation.MoveMutator;
+import com.sjs.lootbotga.evolver.mutation.PlayerMutatorImpl;
+import com.sjs.lootbotga.game.Battle;
+import com.sjs.lootbotga.game.cards.Card;
+import com.sjs.lootbotga.game.cards.PirateCardBuilder;
+import com.sjs.lootbotga.game.player.*;
+import com.sjs.lootbotga.provider.RandomProvider;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * User: StuartS
- * Date: 01/04/12
- * Time: 12:24
- */
-public class PlayerMutatorImplTest extends TestCase{
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-	public void testMutatePlayer() {
+@RunWith(MockitoJUnitRunner.class)
+public class PlayerMutatorImplTest {
+
+    @Mock
+    private RandomProvider randomProvider;
+
+    @InjectMocks
+    private PlayerMutatorImpl playerMutator;
+
+    @Mock
+    private MoveMutator moveMutator;
+
+    @Mock
+    private GameStateMutator gameStateMutator;
+
+    @Test
+	public void shouldNotMutatePlayerWithNoStrategies() {
 		Player player = new PlayerImpl();
 		Map<GameState, Move> playerStrategy = new HashMap<GameState, Move>();
 		player.setStrategy(playerStrategy);
 
-		PlayerMutator playerMutator = new PlayerMutatorImpl();
 		playerMutator.mutatePlayer(player);
 
-		assertFalse(playerStrategy.equals(player.getStrategy()));
+		assertThat(playerStrategy).isEqualTo(player.getStrategy());
 	}
+
+    @Test
+    public void shouldMutateMove50PercentOfTheTime() {
+
+        Player player = new PlayerImpl();
+        Map<GameState, Move> playerStrategy = new HashMap<GameState, Move>();
+        playerStrategy.put(new GameState(Collections.<Card>emptyList(), Collections.<Battle>emptyList(), false), new Move(new PirateCardBuilder().build(), MoveType.PLAY, new Battle()));
+        player.setStrategy(playerStrategy);
+
+        when(randomProvider.random()).thenReturn(0.5);
+
+        playerMutator.mutatePlayer(player);
+
+        verify(moveMutator, atLeastOnce()).mutateMove(any(Move.class));
+    }
+
+    @Test
+    public void shouldMutateGameState50PercentOfTheTime() {
+        Player player = new PlayerImpl();
+        Map<GameState, Move> playerStrategy = new HashMap<GameState, Move>();
+        playerStrategy.put(new GameState(Collections.<Card>emptyList(), Collections.<Battle>emptyList(), false), new Move(new PirateCardBuilder().build(), MoveType.PLAY, new Battle()));
+        player.setStrategy(playerStrategy);
+
+        when(randomProvider.random()).thenReturn(0.6);
+
+        playerMutator.mutatePlayer(player);
+
+        verify(gameStateMutator, atLeastOnce()).mutateGameState(any(GameState.class));
+    }
 }

@@ -1,10 +1,5 @@
 package com.sjs.lootbotga.game.cards;
 
-/**
- * User: StuartS
- * Date: 27/03/12
- * Time: 19:47
- */
 public enum MerchantValue implements CardValue{
 	TWO (2,5),
 	THREE (3,6),

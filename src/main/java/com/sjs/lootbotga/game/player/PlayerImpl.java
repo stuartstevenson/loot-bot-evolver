@@ -9,11 +9,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/**
- * User: StuartS
- * Date: 26/03/12
- * Time: 21:03
- */
 @Component
 public class PlayerImpl implements Player {
 	private Integer id;
