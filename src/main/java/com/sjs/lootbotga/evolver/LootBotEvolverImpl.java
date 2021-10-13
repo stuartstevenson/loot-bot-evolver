@@ -1,10 +1,16 @@
 package com.sjs.lootbotga.evolver;
 
 import com.sjs.lootbotga.game.Game;
+import com.sjs.lootbotga.game.GameEngineImpl;
 import com.sjs.lootbotga.game.player.Player;
 import com.sjs.lootbotga.game.player.PlayerFactory;
 import com.sjs.lootbotga.game.player.PlayerResult;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,6 +20,9 @@ import java.util.stream.Collectors;
 
 @Component
 public class LootBotEvolverImpl implements LootBotEvolver {
+
+	private final Logger logger = LoggerFactory.getLogger(LootBotEvolverImpl.class);
+
     public static final int NUM_PLAYER = 4;
     public static final int START_WINS_VALUE = 0;
     @Autowired
@@ -22,21 +31,17 @@ public class LootBotEvolverImpl implements LootBotEvolver {
 	private List<Player> generation;
 	@Autowired
 	private PlayerEvolver playerEvolver;
-	private int generationCount = 1;
-	private int generationSize;
-
-	public void setGenerationSize(int generationSize) {
-		this.generationSize = generationSize;
-	}
-
-	public void setGenerationCount(int generationCount) {
-		this.generationCount = generationCount;
-	}
+	@Value("${loot.generation.count}")
+	public int generationCount;
+	@Value("${loot.generation.size}")
+	public int generationSize;
 
 	public void run() {
 		generation = playerFactory.generatePlayers(NUM_PLAYER, generationCount);
 		int i = 0;
 		while (i < generationCount) {
+			logger.info(String.format("Starting generation %s", i));
+			logger.info(String.format("Current generation size: %s", generation.size()));
             List<PlayerResult> playerResults = playGames();
 			generation = playerEvolver.nextGeneration(generation, playerResults, i++);
 		}

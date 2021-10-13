@@ -5,7 +5,8 @@ import com.sjs.lootbotga.game.cards.CardType;
 import com.sjs.lootbotga.game.player.Move;
 import com.sjs.lootbotga.game.player.MoveType;
 import com.sjs.lootbotga.game.player.Player;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import java.util.Map;
 
 @Component
 public class GameEngineImpl implements GameEngine {
+
+	private final Logger logger = LoggerFactory.getLogger(GameEngineImpl.class);
 
     private Dealer dealer = new DealerImpl();
 

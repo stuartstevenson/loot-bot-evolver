@@ -8,5 +8,5 @@ import java.util.List;
 
 @Component
 public interface PlayerSelector {
-	List<Player> surviveFittest(List<PlayerResult> playerResults, int percentageToKeep);
+	List<Player> surviveFittest(List<PlayerResult> playerResults, float percentageToKeep);
 }

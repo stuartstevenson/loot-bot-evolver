@@ -18,10 +18,18 @@ public class PlayerSelectorImpl implements PlayerSelector {
     @Autowired
     private RandomProvider randomProvider;
 
-	public List<Player> surviveFittest(List<PlayerResult> playerResults, int percentageToKeep) {
+	/**
+	 *  evaluates the players based on their results
+	 *  calculate how many players to keep from the current generation
+	 *  players are given a probability range
+	 *  given a random number lies between the probability range, then a player will be chosen for the next generation
+	 *  TODO: this isnt working as expected!
+	 */
+	public List<Player> surviveFittest(List<PlayerResult> playerResults, float percentageToKeep) {
 		List<PlayerProbability> playerProbabilities = fitnessFunction.evaluatePlayersChances(playerResults);
 		List<Player> survivingPlayers = new ArrayList<Player>();
-		for (int i = 0; i < Math.round(playerResults.size()*(1/percentageToKeep)); i++){
+		int numberOfPlayersToKeep = Math.round(playerResults.size()*(percentageToKeep));
+		for (int i = 0; i < numberOfPlayersToKeep; i++){
 			double value = randomProvider.random();
             survivingPlayers.addAll(playerProbabilities.stream()
                                                         .filter(playerProbability -> playerProbability.isInRange(value))

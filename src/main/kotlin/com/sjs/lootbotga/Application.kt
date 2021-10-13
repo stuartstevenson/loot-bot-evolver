@@ -1,5 +1,6 @@
 package com.sjs.lootbotga
 
+import com.sjs.lootbotga.evolver.LootBotEvolver
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.ApplicationContext
@@ -10,7 +11,7 @@ class Application
 fun main(args: Array<String>) {
     val ctx: ApplicationContext = runApplication<Application>(*args)
 
-    val lootBotGA = ctx.getBean(LootBotGA::class.java)
+    val lootBotEvolver = ctx.getBean(LootBotEvolver::class.java)
 
-    lootBotGA.run()
+    lootBotEvolver.run()
 }
