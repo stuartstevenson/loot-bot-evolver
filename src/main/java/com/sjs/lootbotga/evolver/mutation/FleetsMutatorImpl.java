@@ -23,7 +23,7 @@ public class FleetsMutatorImpl implements FleetsMutator {
             int randomCardValue = new Random().nextInt(newFleetList.get(randomFleetValue).getHand().size());
 
             Card card = newFleetList.get(randomFleetValue).getHand().remove(randomCardValue);
-            Card newCard = new PirateCardBuilder().fleet(card.getFleetType()).value((PirateValue)getRandomCardValue(card.getValue())).build();
+            Card newCard = new PirateCardBuilder(card.getFleetType(), (PirateValue)getRandomCardValue(card.getValue())).build();
 
 
             newFleetList.get(randomFleetValue).getHand().add(randomCardValue, newCard);

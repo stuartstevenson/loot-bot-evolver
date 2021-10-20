@@ -29,7 +29,7 @@ public class DealerImpl implements Dealer {
         List<Card> cards = new ArrayList<>();
         for (MerchantValue merchantValue: MerchantValue.values()) {
             for (int i = 0; i < merchantValue.getAmount(); i++) {
-                cards.add(new MerchantCardBuilder().value(merchantValue).build());
+                cards.add(new MerchantCardBuilder(merchantValue).build());
             }
         }
         return cards;
@@ -40,10 +40,10 @@ public class DealerImpl implements Dealer {
         List<Card> cards = new ArrayList<>();
 
         for (FleetType fleetType : FleetType.values()) {
-            cards.add(new CaptainCardBuilder().fleet(fleetType).build());
+            cards.add(new CaptainCardBuilder(fleetType).build());
             for (PirateValue pirateValue : PirateValue.values()) {
                 for (int i = 0; i < pirateValue.getAmount(); i++) {
-                    cards.add(new PirateCardBuilder().fleet(fleetType).value(pirateValue).build());
+                    cards.add(new PirateCardBuilder(fleetType, pirateValue).build());
                 }
             }
         }

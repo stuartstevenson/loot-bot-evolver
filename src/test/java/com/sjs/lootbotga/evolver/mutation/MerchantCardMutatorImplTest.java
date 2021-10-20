@@ -26,7 +26,7 @@ public class MerchantCardMutatorImplTest {
 
     @Test
     public void an8CoinShipCannotMutateIntoAn8CoinShip() {
-        Card eightCoinMerchant = new MerchantCardBuilder().value(MerchantValue.EIGHT).build();
+        Card eightCoinMerchant = new MerchantCardBuilder(MerchantValue.EIGHT).build();
 
         Card mutatedCard = merchantCardMutator.mutateMerchant(eightCoinMerchant);
 

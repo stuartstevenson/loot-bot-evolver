@@ -16,7 +16,7 @@ public class CardMutatorImplTest {
 
     @Test
     public void shouldNotBeTheSameCard() {
-        Card card = new PirateCardBuilder().fleet(FleetType.BLUE).value(PirateValue.ONE).build();
+        Card card = new PirateCardBuilder(FleetType.BLUE,PirateValue.ONE).build();
 
         Card newCard = cardMutator.mutateCard(card);
 
