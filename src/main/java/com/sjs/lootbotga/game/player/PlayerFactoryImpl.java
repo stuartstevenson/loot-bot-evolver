@@ -20,7 +20,7 @@ public class PlayerFactoryImpl implements PlayerFactory {
 	}
 
 	private Player generatePlayer(int generationCount, int playerCount, int  numPlayers) {
-		PlayerImpl  player = new PlayerImpl();
+		Player player = new PlayerImpl();
 		generatePlayerId(generationCount, playerCount, player, numPlayers);
 		player.setHand(new ArrayList<Card>());
 		player.setBooty(new ArrayList<Card>());
